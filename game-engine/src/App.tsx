@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import { InputSystem } from './engine/InputSystem';
+
+export function initialize() {
+
+  InputSystem.add("w", moveUp);
+  InputSystem.add("a", moveLeft);
+  InputSystem.add("s", moveDown);
+  InputSystem.add("d", moveRight);
+  // no implementation for move "x" on purpose for testing purposes
+
+
+  function moveUp() {
+    new Audio("swoosh.mp3").play();
+    console.log("UP!");
+  }
+
+  function moveDown() {
+    console.log("DOWN!");
+  }
+
+  function moveLeft() {
+    console.log("LEFT!");
+  }
+
+  function moveRight() {
+    console.log("RIGHT!");
+  }
+
+}
 
 function App() {
+
+  initialize();
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div id='center-div'></div>
   );
 }
 
