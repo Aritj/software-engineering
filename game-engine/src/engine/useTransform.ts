@@ -1,35 +1,25 @@
-import {useState} from "react";
-import {Vector2} from "../../core/maths";
-import {Transform} from "./Transform";
-
+import { useState } from "react";
+import { Vector2D } from "./Vector2D";
+import { Transform } from "./Transform";
 
 type TransformProps = {
-    position?: Vector2;
-    rotation?: number;
-    scale?: Vector2;
-}
+  position?: Vector2D;
+  scale?: Vector2D;
+};
 
 export function useTransform(props?: TransformProps): Transform {
-    const [position, setPosition] = useState(props?.position || Vector2.zero);
-    const [rotation, setRotation] = useState(props?.rotation || 0);
-    const [scale, setScale] = useState(props?.scale || Vector2.one);
+  const [position, setPosition] = useState(props?.position || Vector2D.zero);
+  const [scale, setScale] = useState(props?.scale || Vector2D.one);
 
-    const translate = (pos: Vector2) => {
-        setPosition((current) => Vector2.add(current, pos));
-    }
+  const translate = (pos: Vector2D) => {
+    setPosition((current) => Vector2D.add(current, pos));
+  };
 
-    const rotate = (angle: number) => {
-        setRotation((current) => current + angle);
-    }
-
-    return {
-        position,
-        rotation,
-        scale,
-        setPosition,
-        setRotation,
-        setScale,
-        translate,
-        rotate
-    };
+  return {
+    position,
+    scale,
+    setPosition,
+    setScale,
+    translate,
+  };
 }

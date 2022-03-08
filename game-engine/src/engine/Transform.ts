@@ -1,12 +1,10 @@
+import { Vector2D } from "./Vector2D";
+
+
 export type Transform = {
-    position: Readonly<Vector2>;
-    rotation: Readonly<number>;
-    scale: Readonly<Vector2>;
-
-    setPosition(value: Vector2): void;
-    setRotation(value: number): void;
-    setScale(value: Vector2): void;
-
-    translate(value: Vector2): void;
-    rotate(value: number): void;
+    position: Readonly<Vector2D>;
+    scale: Readonly<Vector2D>;
+    setPosition(value: Vector2D): void;
+    setScale(value: Vector2D): void;
+    translate(value: Vector2D): void;
 };
