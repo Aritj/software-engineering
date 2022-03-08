@@ -1,10 +1,12 @@
-import { IGameComponent } from "./IGameComponent";
+import { IGameComponent } from "../../interfaces/IGameComponent";
+import { TypeTransform } from "./TypeTransform";
 // import transform
 
 export type TypeGameObject = {
     name: string;
+    image: string;
     active: boolean;
-    //transform: Transform;
+    transform: TypeTransform;
 
     components: IGameComponent[];
 

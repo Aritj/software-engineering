@@ -1,5 +1,5 @@
 import { InputSystem } from "../engine/InputSystem";
-import { IGameComponent } from "../engine/IGameComponent";
+import { IGameComponent } from "../engine/interfaces/IGameComponent";
 
 export class PlayerController implements IGameComponent {
     constructor() {}

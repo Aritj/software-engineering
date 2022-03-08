@@ -1,12 +1,18 @@
-import { IGameComponent } from "./IGameComponent";
+import { IGameComponent } from "./interfaces/IGameComponent";
 import data from "../game/physics_properties.json";
 
 export class Physics implements IGameComponent {
     private gravity: number = Object.values(data)[0];
 
-    start(): void {}
+    start(): void {
+        console.log("Test");
+    }
 
-    update(): void {}
+    update(): void {
+        console.log("Test");
+    }
 
-    render(): void {}
+    render(): void {
+        console.log("Test");
+    }
 }
