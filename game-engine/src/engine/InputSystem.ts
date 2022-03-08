@@ -1,17 +1,16 @@
-import data from '../user_input.json';
+import data from "../game/user_input.json";
 
 /**
  * Credits to Jóhann for the InputTriggerMap type.
  */
 export type InputTriggerMap = {
     [code: string]: (() => void)[];
-}
+};
 
 /**
  * InputSystem which maps inputs (string) to a function, to be executed upon event trigger.
  */
 export class InputSystem {
-
     private _JSONObject: Object = data;
     private _triggers: InputTriggerMap = {};
     public static instance: InputSystem = new InputSystem();
@@ -23,7 +22,7 @@ export class InputSystem {
     public static add(key: string, onTriggered: () => void): void {
         this.instance.addTrigger(key, onTriggered);
     }
-
+  
     private isValidMove(key: string): boolean {
         return Object.values(this._JSONObject).includes(key);
     }
@@ -40,12 +39,11 @@ export class InputSystem {
 
     private onButtonDown(event: KeyboardEvent): void {
         if (this._triggers[event.key]) {
-            return this._triggers[event.key].forEach(trigger => trigger());
+            return this._triggers[event.key].forEach((trigger) => trigger());
         }
 
         if (this.isValidMove(event.key)) { // for game developer debugging purposes
             return console.warn(`Valid move ${event.key} has no trigger!`);
         }
     }
-
 }
