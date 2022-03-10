@@ -15,7 +15,6 @@ export class PlayerController extends GameComponent {
     moveUp() {
         new Audio("audio/swoosh.mp3").play();
         console.log("UP!");
-        //this.transform.translate(Vector2D.right.multiply(10));
     }
 
     moveDown() {

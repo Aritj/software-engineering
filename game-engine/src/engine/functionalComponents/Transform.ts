@@ -5,7 +5,8 @@ import { PropsTransform } from "../types/props/PropsTransform";
 
 export function Transform(props: PropsTransform): TypeTransform {
     const [position, setPosition] = useState(props.position);
-    const [scale, setScale] = useState(props.scale);
+    const [scaleX, setScaleX] = useState(props.scaleX);
+    const [scaleY, setScaleY] = useState(props.scaleY);
 
     const translate = (pos: Vector2D) => {
         setPosition((current) => Vector2D.add(current, pos));
@@ -13,9 +14,11 @@ export function Transform(props: PropsTransform): TypeTransform {
 
     return {
         position,
-        scale,
+        scaleX,
+        scaleY,
         setPosition,
-        setScale,
+        setScaleX,
+        setScaleY,
         translate,
     };
 }

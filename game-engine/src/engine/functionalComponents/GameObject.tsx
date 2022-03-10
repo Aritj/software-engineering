@@ -10,15 +10,13 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
 
     const [components, setComponents] = useState<GameComponent[]>([]);
 
-    console.log(props.transform.position.x);
-
     return (
         <img
             src={props.image}
             alt={props.name}
             style={{
                 position: "absolute",
-                transform: `translate(${props.transform.position.x}px, ${props.transform.position.y}px)`,
+                transform: `translate(${props.transform.position.x}px, ${props.transform.position.y}px) scaleX(${props.transform.scaleX}) scaleY(${props.transform.scaleY})`,
                 zIndex: `${props.transform.z}`,
             }}
         />

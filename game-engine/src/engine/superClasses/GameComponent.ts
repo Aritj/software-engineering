@@ -1,6 +1,19 @@
 import { TypeTransform } from "../types/objects/TypeTransform";
 import { TypeGameObject } from "../types/objects/TypeGameObject";
 import { Vector2D } from "../Vector2D";
+import { GameObject } from "../functionalComponents/GameObject";
+import { Transform } from "../functionalComponents/Transform";
+import { PropsTransform } from "../types/props/PropsTransform";
+import { PropsGameObject } from "../types/props/PropsGameObject";
+
+export type GameComponentInstanceDefinition<TComponent extends GameComponent> =
+    {
+        new (
+            enabled: boolean,
+            gameObject: PropsGameObject,
+            transform: PropsTransform
+        ): TComponent;
+    };
 
 export class GameComponent {
     public constructor(

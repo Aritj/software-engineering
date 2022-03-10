@@ -13,7 +13,7 @@ import Game from "./Game";
 
 function App() {
     return (
-        <div id="screen-div">
+        <div id="game-window-div">
             <Game />
         </div>
     );
