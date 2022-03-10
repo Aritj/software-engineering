@@ -1,4 +1,4 @@
-import { IGameComponent } from "../../interfaces/IGameComponent";
+import { GameComponent } from "../../superClasses/GameComponent";
 import { TypeTransform } from "./TypeTransform";
 // import transform
 
@@ -8,8 +8,8 @@ export type TypeGameObject = {
     active: boolean;
     transform: TypeTransform;
 
-    components: IGameComponent[];
+    components: GameComponent[];
 
     addComponent(): void;
-    getComponent(): IGameComponent;
+    getComponent(): GameComponent;
 };

@@ -1,7 +1,7 @@
-import { IGameComponent } from "./interfaces/IGameComponent";
+import { GameComponent } from "./superClasses/GameComponent";
 import data from "../game/physics_properties.json";
 
-export class Physics implements IGameComponent {
+export class Physics extends GameComponent {
     private gravity: number = Object.values(data)[0];
 
     start(): void {
