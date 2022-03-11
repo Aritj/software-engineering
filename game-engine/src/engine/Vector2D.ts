@@ -1,6 +1,8 @@
 export class Vector2D {
+    constructor(public x: number, public y: number) {}
 
-    constructor(public x: number, public y: number) {
+    public static setPosition(test1: number, test2: number): Vector2D {
+        return new Vector2D(test1, test2);
     }
 
     public static get zero(): Vector2D {

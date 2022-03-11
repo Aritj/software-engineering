@@ -1,10 +1,10 @@
-import { IGameComponent } from "../../interfaces/IGameComponent";
-import { TypeTransform } from "../objects/TypeTransform";
+import { GameComponent } from "../../superClasses/GameComponent";
+import { PropsTransform } from "./PropsTransform";
 
 export type PropsGameObject = {
     name: string;
     image: string;
     active: boolean;
-    components: IGameComponent[];
-    transform: TypeTransform;
+    components: typeof GameComponent[];
+    transform: PropsTransform;
 };

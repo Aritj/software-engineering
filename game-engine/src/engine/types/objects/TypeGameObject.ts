@@ -1,15 +1,16 @@
-import { IGameComponent } from "../../interfaces/IGameComponent";
+import { GameComponent } from "../../superClasses/GameComponent";
 import { TypeTransform } from "./TypeTransform";
-// import transform
+import { GameComponentInstanceDefinition } from "../../superClasses/GameComponent";
 
 export type TypeGameObject = {
     name: string;
     image: string;
     active: boolean;
     transform: TypeTransform;
+    setActive(value: boolean): void;
 
-    components: IGameComponent[];
+    components: GameComponent[];
 
-    addComponent(): void;
-    getComponent(): IGameComponent;
+    getComponent<TComponent extends GameComponent>(type: GameComponentInstanceDefinition<TComponent>): TComponent | null;
+    addComponent<TComponent extends GameComponent>(type: GameComponentInstanceDefinition<TComponent>, enabled: boolean): TComponent
 };
