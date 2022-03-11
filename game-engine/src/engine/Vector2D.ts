@@ -22,11 +22,11 @@ export class Vector2D {
     }
 
     public static get up(): Vector2D {
-        return new Vector2D(0, 1);
+        return new Vector2D(0, -1);
     }
 
     public static get down(): Vector2D {
-        return new Vector2D(0, -1);
+        return new Vector2D(0, 1);
     }
 
     public static add(a: Vector2D, b: Vector2D): Vector2D {
