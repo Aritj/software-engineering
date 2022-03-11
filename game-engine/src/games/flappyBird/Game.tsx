@@ -1,12 +1,12 @@
-import "./App.css";
+import "../../App.css";
 import { GameObject } from "../../engine/functionalComponents/GameObject";
 import { Vector2D } from "../../engine/Vector2D";
 import { Fragment, useEffect } from "react";
 
 import { useGameLoop } from "../../engine/loop";
-import bird from "./games/flappyBird/images/bird.png";
-import pipe from "./games/flappyBird/images/pipe.png";
-import background from "./games/flappyBird/images/background.png";
+import bird from "../flappyBird/images/bird.png";
+import pipe from "../flappyBird/images/pipe.png";
+import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
 
 function Game() {
