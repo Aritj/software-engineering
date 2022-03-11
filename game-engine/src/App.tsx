@@ -1,10 +1,6 @@
 import "./App.css";
-import Game from "./Game";
-import userInput from "./games/flappyBird/user_input.json";
+import Game from "./games/flappyBird/Game";
 import { GameLoop } from "./engine/loop";
-import { InputSystem } from "./engine/input/InputSystem";
-
-InputSystem.Initialize(userInput);
 
 function App() {
     return (

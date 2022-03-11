@@ -1,52 +1,51 @@
-import { InputMap } from "./InputMap";
-import { InputTriggerMap } from "./InputTriggerMap";
+import data from "../../games/flappyBird/user_input.json";
 
+/**
+ * Credits to Jóhann for the InputTriggerMap type.
+ */
+export type InputTriggerMap = {
+    [code: string]: (() => void)[];
+};
+
+/**
+ * InputSystem which maps inputs (string) to a function, to be executed upon event trigger.
+ */
 export class InputSystem {
-    private static instance: InputSystem;
+    private _JSONObject: Object = data;
+    private _triggers: InputTriggerMap = {};
+    public static instance: InputSystem = new InputSystem();
 
-    private _buttonDownTriggers: InputTriggerMap;
-
-    private constructor(private readonly _maps: InputMap) {
-        document.addEventListener("keydown", this.onButtonDown.bind(this));
-        this._buttonDownTriggers = {};
+    private constructor() {
+        document.addEventListener("keydown", this.onButtonDown.bind(this)); // add event listener
     }
 
-    public static Initialize(map: InputMap) {
-        if (!InputSystem.instance) {
-            InputSystem.instance = new InputSystem(map);
-        }
+    public static add(key: string, onTriggered: () => void): void {
+        this.instance.addTrigger(key, onTriggered);
+    }
+  
+    private isValidMove(key: string): boolean {
+        return Object.values(this._JSONObject).includes(key);
     }
 
-    public static addButtonDownListener(key: string, onTriggered: () => void) {
-        InputSystem.instance.registerOnButtonDownListener(key, onTriggered);
-    }
-
-    private registerOnButtonDownListener(key: string, onTriggered: () => void) {
-        const code = this._maps[key];
-        if (!code) {
-            console.warn(`Failed to find map for key: ${key}`);
-            return;
+    private addTrigger(key: string, onTriggered: () => void): void {
+        if (! this.isValidMove(key)) { // for game developer debugging purposes
+            return console.warn(`${key} is not defined in 'user_input.json'`);
         }
 
-        if (!this._buttonDownTriggers[code]) {
-            this._buttonDownTriggers = {
-                ...this._buttonDownTriggers,
-                [code]: [],
-            };
+        if (! this._triggers[key]) {
+            this._triggers = {...this._triggers, [key]: []};
         }
 
-        let triggers = this._buttonDownTriggers[code];
-        triggers.push(onTriggered);
+        this._triggers[key].push(onTriggered);
     }
 
-    private onButtonDown(e: any) {
-        for (const [code, triggers] of Object.entries(
-            this._buttonDownTriggers
-        )) {
-            if (e.code === code || e.keyCode === code) {
-                triggers.forEach((trigger) => trigger());
-                break;
-            }
+    private onButtonDown(event: KeyboardEvent): void {
+        if (this._triggers[event.key]) {
+            return this._triggers[event.key].forEach((trigger) => trigger());
+        }
+
+        if (this.isValidMove(event.key)) { // for game developer debugging purposes
+            return console.warn(`Valid move ${event.key} has no trigger!`);
         }
     }
 }
