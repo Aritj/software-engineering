@@ -5,6 +5,6 @@ export type PropsGameObject = {
     name: string;
     image: string;
     active: boolean;
-    components: GameComponent[];
+    components: typeof GameComponent[];
     transform: PropsTransform;
 };

@@ -10,8 +10,8 @@ export type GameComponentInstanceDefinition<TComponent extends GameComponent> =
     {
         new (
             enabled: boolean,
-            gameObject: PropsGameObject,
-            transform: PropsTransform
+            gameObject: TypeGameObject,
+            transform: TypeTransform
         ): TComponent;
     };
 
@@ -36,5 +36,7 @@ export class GameComponent {
 
     public Render(position: Vector2D): any {
         return null;
+    
     }
+
 }

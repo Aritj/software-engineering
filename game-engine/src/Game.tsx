@@ -1,25 +1,30 @@
 import "./App.css";
 import { GameComponent } from "./engine/superClasses/GameComponent";
-import bird from "./game/images/bird.png";
-import pipe from "./game/images/pipe.png";
-import background from "./game/images/background.png";
 import { GameObject } from "./engine/functionalComponents/GameObject";
-import { Physics } from "./engine/Physics";
 import { Vector2D } from "./engine/Vector2D";
-import { Transform } from "./engine/functionalComponents/Transform";
-import { render } from "@testing-library/react";
-import { InputSystem } from "./engine/InputSystem";
-import { PropsGameObject } from "./engine/types/props/PropsGameObject";
-import React from "react";
+import { Fragment, useEffect } from "react";
+
+import { useGameLoop } from "./engine/loop";
+import bird from "./games/flappyBird/images/bird.png";
+import pipe from "./games/flappyBird/images/pipe.png";
+import background from "./games/flappyBird/images/background.png";
+import { InputSystem } from "./engine/input/InputSystem";
 
 function Game() {
+    const loop = useGameLoop();
+
+    // Start the game
+    useEffect(() => {
+        loop.start();
+    }, []);
+
     return (
-        <React.Fragment>
+        <Fragment>
             <GameObject
                 name={"Bird"}
                 image={bird}
                 active={true}
-                components={[]}
+                components={[PlayerController]}
                 transform={{
                     position: Vector2D.setPosition(100, 100),
                     scaleX: 0.5,
@@ -32,7 +37,7 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[]}
+                components={[PlayerController]}
                 transform={{
                     position: Vector2D.one,
                     scaleX: 0.4,
@@ -45,7 +50,7 @@ function Game() {
                 name={"Background"}
                 image={background}
                 active={true}
-                components={[]}
+                components={[PlayerController]}
                 transform={{
                     position: Vector2D.setPosition(150, 10),
                     scaleX: 1.4,
@@ -53,34 +58,38 @@ function Game() {
                     z: 0,
                 }}
             />
-        </React.Fragment>
+        </Fragment>
     );
 }
 
 export class PlayerController extends GameComponent {
-    start(): void {
-        InputSystem.add("w", this.moveUp);
-        InputSystem.add("a", this.moveLeft);
-        InputSystem.add("s", this.moveDown);
-        InputSystem.add("d", this.moveRight);
+    public Start(): void {
+        InputSystem.addButtonDownListener("left", this.onGoLeft.bind(this));
+        InputSystem.addButtonDownListener("right", this.onGoRight.bind(this));
+        
     }
 
-    moveUp() {
-        new Audio("audio/swoosh.mp3").play();
-        console.log("UP!");
+    private onGoLeft() {
+        this.transform.translate(Vector2D.left.multiply(8));
     }
 
-    moveDown() {
-        console.log("DOWN!");
+    private onGoRight() {
+        this.transform.translate(Vector2D.right.multiply(8));
     }
 
-    moveLeft() {
-        console.log("LEFT!");
+    public Render(position: Vector2D) {
+       return <img
+            src={this.gameObject.image}
+            alt={this.gameObject.name}
+            style={{
+                position: "absolute",
+                transform: `translate(${position.x}px, ${position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
+                zIndex: `${this.gameObject.transform.z}`,
+            }}
+        />
+    
     }
 
-    moveRight() {
-        console.log("RIGHT!");
-    }
 }
 
 export default Game;
