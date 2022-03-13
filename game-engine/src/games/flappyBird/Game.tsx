@@ -7,7 +7,7 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
-import { Background, Collision, Physics, Velocity } from "../../engine/components/Components";
+import { BackgroundComponent, PhysicsComponent, VelocityComponent, CollisionComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 
@@ -27,7 +27,7 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
-                components={[PlayerController, Physics, Collision]}
+                components={[PlayerController, PhysicsComponent, CollisionComponent]}
                 transform={{
                     position: new Vector2D(100, 100),
                     scaleX: 0.5,
@@ -40,7 +40,7 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[Velocity, Collision]}
+                components={[VelocityComponent]}
                 transform={{
                     position: new Vector2D(0, 200),
                     scaleX: 0.4,
@@ -53,7 +53,7 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[Velocity, Collision]}
+                components={[VelocityComponent]}
                 transform={{
                     position: new Vector2D(350, -200),
                     scaleX: 0.4,
@@ -66,7 +66,7 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[Velocity, Collision]}
+                components={[VelocityComponent]}
                 transform={{
                     position: new Vector2D(700, 200),
                     scaleX: 0.4,
@@ -79,7 +79,7 @@ function Game() {
                 name={"Background"}
                 image={background}
                 active={true}
-                components={[Background]}
+                components={[BackgroundComponent]}
                 transform={{
                     position: new Vector2D(150, 10),
                     scaleX: 1.4,

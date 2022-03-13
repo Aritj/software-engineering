@@ -1,23 +1,43 @@
 import { GameComponent } from "../superClasses/GameComponent";
 import { Vector2D } from "../Vector2D";
 
-export class Physics extends GameComponent {
-    public Update(dt: number): void {        
-        this.transform.translate(Vector2D.down.multiply(1))
+export class PhysicsComponent extends GameComponent {
+    public Update(dt: number): void {
+        this.transform.position.add(Vector2D.down.multiply(1));
     }
 }
 
-export class Velocity extends GameComponent {
+export class VelocityComponent extends GameComponent {
     public Update(dt: number): void {        
-        this.transform.translate(Vector2D.left.multiply(1))
+        this.transform.position.add(Vector2D.left.multiply(1))
     }
 }
 
-export class Collision extends GameComponent {
-    // missing implementation
+export class CollisionComponent extends GameComponent  {
+
+    public start() {
+    }
+
+
+    public Update(dt: number): void {
+    }
+
+    public Render(position: Vector2D): JSX.Element {
+        return <img
+        src={this.gameObject.image}
+        alt={this.gameObject.name}
+        style={{
+            position: "absolute",
+            border: "3px solid red",
+            transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
+            zIndex: `${this.gameObject.transform.z}`,
+        }}
+    />
+    }
+
 }
 
-export class Background extends GameComponent {
+export class BackgroundComponent extends GameComponent {
     /**
      * Quick-fix for rendering the background. This class should not be necessary!!!
      */

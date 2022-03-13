@@ -18,8 +18,6 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
 
     const [components, setComponents] = useState<GameComponent[]>([]);
 
-
-       //
        const gameObject: TypeGameObject = {
            name,
            image,
@@ -51,8 +49,7 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
 
     return <Fragment>
         {components.map((comp, i) => {
-            console.log("This is i: " + i, comp);
-            
+            console.log(comp)
             return <Fragment key={i + " : " + transform.position.x}>
                 {comp.Render(transform.position)}
             </Fragment>

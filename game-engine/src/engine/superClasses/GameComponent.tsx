@@ -38,7 +38,7 @@ export class GameComponent {
         alt={this.gameObject.name}
         style={{
             position: "absolute",
-            transform: `translate(${position.x}px, ${position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
+            transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
             zIndex: `${this.gameObject.transform.z}`,
         }}
     />
