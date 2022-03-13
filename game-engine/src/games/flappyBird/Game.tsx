@@ -25,7 +25,7 @@ function Game() {
                 active={true}
                 components={[PlayerController]}
                 transform={{
-                    position: Vector2D.setPosition(100, 100),
+                    position: new Vector2D(100, 100),
                     scaleX: 0.5,
                     scaleY: 0.5,
                     z: 3,
@@ -51,7 +51,7 @@ function Game() {
                 active={true}
                 components={[PlayerController]}
                 transform={{
-                    position: Vector2D.setPosition(150, 10),
+                    position: new Vector2D(150, 10),
                     scaleX: 1.4,
                     scaleY: 1.3,
                     z: 0,
