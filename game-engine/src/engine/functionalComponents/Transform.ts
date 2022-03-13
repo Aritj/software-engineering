@@ -14,7 +14,7 @@ export function Transform(props?: PropsTransform): TypeTransform {
 
 
     const translate = (pos: Vector2D) => {
-        setPosition((current) => Vector2D.add(current, pos));
+        setPosition((current) => current.add(pos))
     };
 
     const rotate = (angle: number) => {
