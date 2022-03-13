@@ -11,31 +11,18 @@ export class PlayerController extends GameComponent {
     }
 
     private onGoUp() {
-        this.transform.translate(Vector2D.up.multiply(8));
+        this.transform.translate(Vector2D.up.multiply(64));
     }
 
     private onGoLeft() {
-        this.transform.translate(Vector2D.left.multiply(8));
+        this.transform.translate(Vector2D.left.multiply(32));
     }
 
     private onGoDown() {
-        this.transform.translate(Vector2D.down.multiply(8));
+        this.transform.translate(Vector2D.down.multiply(32));
     }
 
     private onGoRight() {
-        this.transform.translate(Vector2D.right.multiply(8));
-    }
-
-    public Render(position: Vector2D) {
-       return <img
-            src={this.gameObject.image}
-            alt={this.gameObject.name}
-            style={{
-                position: "absolute",
-                transform: `translate(${position.x}px, ${position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
-                zIndex: `${this.gameObject.transform.z}`,
-            }}
-        />
-    
+        this.transform.translate(Vector2D.right.multiply(32));
     }
 }
