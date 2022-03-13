@@ -1,5 +1,3 @@
-import data from "../../games/flappyBird/user_input.json";
-
 /**
  * Credits to Jóhann for the InputTriggerMap type.
  */
@@ -11,20 +9,27 @@ export type InputTriggerMap = {
  * InputSystem which maps inputs (string) to a function, to be executed upon event trigger.
  */
 export class InputSystem {
-    private _JSONObject: Object = data;
+    private _data: Object;
     private _triggers: InputTriggerMap = {};
-    public static instance: InputSystem = new InputSystem();
+    private static _instance: InputSystem;
 
-    private constructor() {
+    private constructor(data: Object) {
+        this._data = data;
         document.addEventListener("keydown", this.onButtonDown.bind(this)); // add event listener
     }
 
+    public static initialize(data: Object): void {
+        if (! this._instance) {
+            this._instance = new InputSystem(data);
+        }
+    }
+
     public static add(key: string, onTriggered: () => void): void {
-        this.instance.addTrigger(key, onTriggered);
+        this._instance.addTrigger(key, onTriggered);
     }
   
     private isValidMove(key: string): boolean {
-        return Object.values(this._JSONObject).includes(key);
+        return Object.values(this._data).includes(key);
     }
 
     private addTrigger(key: string, onTriggered: () => void): void {

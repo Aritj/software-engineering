@@ -1,10 +1,6 @@
 import { TypeTransform } from "../types/objects/TypeTransform";
 import { TypeGameObject } from "../types/objects/TypeGameObject";
 import { Vector2D } from "../Vector2D";
-import { GameObject } from "../functionalComponents/GameObject";
-import { Transform } from "../functionalComponents/Transform";
-import { PropsTransform } from "../types/props/PropsTransform";
-import { PropsGameObject } from "../types/props/PropsGameObject";
 
 export type GameComponentInstanceDefinition<TComponent extends GameComponent> =
     {
@@ -30,13 +26,22 @@ export class GameComponent {
         this._enabled = value;
     }
 
-    public Start() {}
+    public Start() {
+        this.transform.translate(new Vector2D(0, 0))
+    }
 
     public Update(dt: number) {}
 
-    public Render(position: Vector2D): any {
-        return null;
-    
+    public Render(position: Vector2D) {
+        return <img
+        src={this.gameObject.image}
+        alt={this.gameObject.name}
+        style={{
+            position: "absolute",
+            transform: `translate(${position.x}px, ${position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
+            zIndex: `${this.gameObject.transform.z}`,
+        }}
+    />
     }
 
 }
