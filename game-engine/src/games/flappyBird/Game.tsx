@@ -8,6 +8,7 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
+import { Physics } from "../../engine/components/Physics";
 
 function Game() {
     const loop = useGameLoop();
@@ -23,7 +24,7 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
-                components={[PlayerController]}
+                components={[PlayerController, Physics]}
                 transform={{
                     position: Vector2D.setPosition(100, 100),
                     scaleX: 0.5,
