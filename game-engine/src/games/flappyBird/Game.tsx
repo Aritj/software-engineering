@@ -42,7 +42,7 @@ function Game() {
                 active={true}
                 components={[Velocity, Collision]}
                 transform={{
-                    position: Vector2D.setPosition(0, 200),
+                    position: new Vector2D(0, 200),
                     scaleX: 0.4,
                     scaleY: 0.6,
                     z: 1,
@@ -55,7 +55,7 @@ function Game() {
                 active={true}
                 components={[Velocity, Collision]}
                 transform={{
-                    position: Vector2D.setPosition(350, -200),
+                    position: new Vector2D(350, -200),
                     scaleX: 0.4,
                     scaleY: -0.6,
                     z: 1,
@@ -68,7 +68,7 @@ function Game() {
                 active={true}
                 components={[Velocity, Collision]}
                 transform={{
-                    position: Vector2D.setPosition(700, 200),
+                    position: new Vector2D(700, 200),
                     scaleX: 0.4,
                     scaleY: 0.6,
                     z: 1,
