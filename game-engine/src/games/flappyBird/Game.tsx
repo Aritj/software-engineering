@@ -40,7 +40,7 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[VelocityComponent]}
+                components={[VelocityComponent, CollisionComponent]}
                 transform={{
                     position: new Vector2D(0, 200),
                     scaleX: 0.4,
@@ -53,7 +53,7 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[VelocityComponent]}
+                components={[VelocityComponent, CollisionComponent]}
                 transform={{
                     position: new Vector2D(350, -200),
                     scaleX: 0.4,
@@ -66,7 +66,7 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[VelocityComponent]}
+                components={[VelocityComponent, CollisionComponent]}
                 transform={{
                     position: new Vector2D(700, 200),
                     scaleX: 0.4,

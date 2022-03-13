@@ -30,7 +30,9 @@ export class GameComponent {
         this.transform.translate(new Vector2D(0, 0))
     }
 
-    public Update(dt: number) {}
+    public Update(dt: number) {
+        this.transform.translate(new Vector2D(0, 0))
+    }
 
     public Render(position: Vector2D) {
         return <img

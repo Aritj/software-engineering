@@ -4,23 +4,20 @@ import { Vector2D } from "../Vector2D";
 export class PhysicsComponent extends GameComponent {
     public Update(dt: number): void {
         this.transform.position.add(Vector2D.down.multiply(1));
+        this.transform.translate(new Vector2D(0, 0))
+
     }
 }
 
 export class VelocityComponent extends GameComponent {
     public Update(dt: number): void {        
         this.transform.position.add(Vector2D.left.multiply(1))
+        this.transform.translate(new Vector2D(0, 0))
+
     }
 }
 
 export class CollisionComponent extends GameComponent  {
-
-    public start() {
-    }
-
-
-    public Update(dt: number): void {
-    }
 
     public Render(position: Vector2D): JSX.Element {
         return <img
@@ -38,6 +35,8 @@ export class CollisionComponent extends GameComponent  {
 }
 
 export class BackgroundComponent extends GameComponent {
+
+
     /**
      * Quick-fix for rendering the background. This class should not be necessary!!!
      */
