@@ -43,8 +43,9 @@ export class BoxCollisionComponent extends GameComponent  {
             transform: `translate(${(this.transform.position.x + (1/2*this.gameObject.width))}px, ${this.transform.position.y}px)`,
             width: this.gameObject.width,
             height: this.gameObject.height,
-            /*background: "red"*/
+            //background: "red"
         }}
     />
     }
 }
+
