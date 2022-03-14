@@ -30,7 +30,9 @@ export class GameComponent {
         this.transform.translate(new Vector2D(0, 0))
     }
 
-    public Update(dt: number) {}
+    public Update(dt: number) {
+        this.transform.translate(new Vector2D(0, 0))
+    }
 
     public Render(position: Vector2D) {
         return <img
@@ -38,7 +40,8 @@ export class GameComponent {
         alt={this.gameObject.name}
         style={{
             position: "absolute",
-            transform: `translate(${position.x}px, ${position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
+            animation: "balloon 15s infinite linear",
+            transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
             zIndex: `${this.gameObject.transform.z}`,
         }}
     />

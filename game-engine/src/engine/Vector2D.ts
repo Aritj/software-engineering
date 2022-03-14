@@ -1,7 +1,7 @@
 export class Vector2D {
 
-
-  constructor(public x: number, public y: number) {}
+  constructor(public x: number, public y: number) {
+  }
 
   public static get zero(): Vector2D {
     return new Vector2D(0, 0);

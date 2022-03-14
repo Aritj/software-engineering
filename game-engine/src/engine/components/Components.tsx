@@ -1,24 +1,50 @@
 import { GameComponent } from "../superClasses/GameComponent";
 import { Vector2D } from "../Vector2D";
 
-export class Physics extends GameComponent {
-    public Update(dt: number): void {        
-        this.transform.translate(Vector2D.down.multiply(1))
+export class PhysicsComponent extends GameComponent {
+    multiplier: number = 0;
+
+    public Update(dt: number): void {
+        this.multiplier += 0.1;
+        this.transform.setPosition(this.transform.position.add(Vector2D.down.multiply(this.multiplier)));
     }
 }
 
-export class Velocity extends GameComponent {
-    public Update(dt: number): void {        
-        this.transform.translate(Vector2D.left.multiply(1))
+export class VelocityComponent extends GameComponent {
+    multiplier: number = 2;
+
+    public Update(dt: number): void {
+        this.transform.setPosition(this.transform.position.add(Vector2D.left.multiply(this.multiplier)));
     }
 }
 
-export class Collision extends GameComponent {
-    // missing implementation
+export class CollisionComponent extends GameComponent {
+    //Collision.add(this)
+
+    public Render(position: Vector2D): JSX.Element {
+        return <img
+        src={this.gameObject.image}
+        alt={this.gameObject.name}
+        style={{
+            position: "absolute",
+            border: "3px solid green",
+            transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
+            zIndex: `${this.gameObject.transform.z}`,
+        }}
+    />
+    }
 }
 
-export class Background extends GameComponent {
-    /**
-     * Quick-fix for rendering the background. This class should not be necessary!!!
-     */
+export class BoxCollisionComponent extends GameComponent  {
+    public Render(position: Vector2D): JSX.Element {
+        return <div
+        style={{
+            position: "absolute",
+            transform: `translate(${(this.transform.position.x + (1/2*this.gameObject.width))}px, ${this.transform.position.y}px)`,
+            width: this.gameObject.width,
+            height: this.gameObject.height,
+            /*background: "red"*/
+        }}
+    />
+    }
 }
