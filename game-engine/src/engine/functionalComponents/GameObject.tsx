@@ -6,10 +6,12 @@ import { Fragment, useEffect, useLayoutEffect } from "react";
 import { TypeGameObject } from "../types/objects/TypeGameObject";
 import { GameComponentInstanceDefinition } from "../superClasses/GameComponent";
 import { useGameLoop } from "../loop";
+import { useCollision } from "../Collision/useCollision";
 
 
 export function GameObject(props: PropsWithChildren<PropsGameObject>) {
     const loop = useGameLoop();
+    const collision = useCollision();
 
     const [name, setName] = useState(props.name);
     const [image, setImage] = useState(props.image);
@@ -50,7 +52,7 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
     useEffect(() => {
         console.log("Inside use effect");
         
-        loop.registerCollisionObjects(gameObject);
+        collision.registerCollisionObjects(gameObject);
     }, []);
 
     return <Fragment>

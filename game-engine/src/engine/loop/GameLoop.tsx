@@ -1,5 +1,6 @@
 import {PropsWithChildren, useCallback, useState} from "react";
 import {PlayerController} from "../../games/flappyBird/PlayerController";
+import { useCollision } from "../Collision/useCollision";
 import {CollisionComponent} from "../components/Components";
 import {GameComponent} from "../superClasses/GameComponent";
 import {TypeGameObject} from "../types/objects/TypeGameObject";
@@ -8,8 +9,8 @@ import {GameLoopContext} from "./GameLoopContext";
 
 export function GameLoop(props: PropsWithChildren<{}>) {
     const [objects, setObject] = useState<TypeGameObject[]>([]);
-    const [collisionObject, setCollisionObject] = useState<TypeGameObject[]>([]);
 
+    const {registerCollisionObjects, checkCollision} = useCollision();
 
     const registerObject = (gameObject: TypeGameObject) => {
         setObject((objects) => {
@@ -18,65 +19,14 @@ export function GameLoop(props: PropsWithChildren<{}>) {
         });
     };
 
-    /**
-     * Takes in gameObject and checks if its list of gameComponents include
-     * @param gameObject
-     */
-    const registerCollisionObjects = (gameObject: TypeGameObject) => {
-
-        if (gameObject.getComponent(CollisionComponent) !== null) {
-
-            setCollisionObject((collisionObject) => {
-                collisionObject.push(gameObject);
-                console.log(collisionObject);
-                return collisionObject;
-            })
-            return;
-
-        }
-
-    };
-
-    const checkCollision = () => {
-
-        for (let i: number = 0; i < collisionObject.length; i++) {
-            let current: TypeGameObject = collisionObject[i]
-
-            for (let j: number = i + 1; j < collisionObject.length; j++) {
-                if (current == collisionObject[j]) {
-                    continue;
-                }
-
-                if ((current.transform.position.x < (collisionObject[j].transform.position.x + collisionObject[j].transform.width)) &&
-                    ((current.transform.position.x + current.transform.width) > collisionObject[j].transform.position.x) &&
-                    (current.transform.position.y < (collisionObject[j].transform.position.y + collisionObject[j].transform.height)) &&
-                    ((current.transform.height + current.transform.position.y) > collisionObject[j].transform.position.y)) {
-                    console.log("Collision");
-
-                }
-
-                /*if (((current.transform.position.y + current.height) < (collisionObject[j].transform.position.y)) ||
-                    (current.transform.position.y > (collisionObject[j].transform.position.y + collisionObject[j].height)) ||
-                    ((current.transform.position.x + current.width) < collisionObject[j].transform.position.x) ||
-                    (current.transform.position.x > (collisionObject[j].transform.position.x + collisionObject[j].width))) {
-                    console.log("Collision");
-
-                }*/
-
-            }
-        }
-
-    }
 
     const updateLoop = (now: number) => {
         // Updates
+        
         objects.forEach((obj) => {
             obj.active && obj.components.forEach((comp) => comp.enabled && comp.Update(now));
         });
-
-
         checkCollision();
-
         window.requestAnimationFrame(updateLoop);
     };
 
@@ -88,7 +38,7 @@ export function GameLoop(props: PropsWithChildren<{}>) {
     }, []);
 
     return (
-        <GameLoopContext.Provider value={{registerObject, start, registerCollisionObjects}}>
+        <GameLoopContext.Provider value={{registerObject, start}}>
             {props.children}
         </GameLoopContext.Provider>
     );
