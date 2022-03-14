@@ -48,9 +48,8 @@ export function pipeFactory() {
             image={pipe}
             active={true}
 
-            height={781*0.6}
-            width={860*0.4}
-            components={[CollisionComponent, BoxCollisionComponent]}
+            
+            components={[CollisionComponent]}
 
 
 
@@ -97,8 +96,8 @@ function Game() {
                 image={bird}
                 active={true}
 
-                height={108*0.5}
-                width={153*0.5}
+                
+                
                 components={[PlayerController, /*PhysicsComponent,*/ CollisionComponent]}
 
 
