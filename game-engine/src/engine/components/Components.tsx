@@ -5,7 +5,7 @@ export class PhysicsComponent extends GameComponent {
     multiplier: number = 0;
 
     public Update(dt: number): void {
-        this.multiplier += 0.1;
+        this.multiplier += 0.2;
         this.transform.setPosition(this.transform.position.add(Vector2D.down.multiply(this.multiplier)));
     }
 }
@@ -28,6 +28,7 @@ export class CollisionComponent extends GameComponent {
         style={{
             position: "absolute",
             border: "3px solid green",
+            transition: "0.1s",
             transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
             zIndex: `${this.gameObject.transform.z}`,
         }}
@@ -46,5 +47,19 @@ export class BoxCollisionComponent extends GameComponent  {
             /*background: "red"*/
         }}
     />
+    }
+}
+
+export class CullingComponent extends GameComponent {
+
+    public Update(dt: number): void {
+        console.log(this.transform.position.x)
+        if (this.transform.position.x < 400) {
+        }
+    }
+
+    public Render(position: Vector2D): JSX.Element {
+        // no need to render.
+        return <></>;
     }
 }

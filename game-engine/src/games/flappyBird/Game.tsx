@@ -7,12 +7,11 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
-import { PhysicsComponent, VelocityComponent, CollisionComponent, BoxCollisionComponent } from "../../engine/components/Components";
+import { PhysicsComponent, VelocityComponent, CollisionComponent, BoxCollisionComponent, CullingComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
 import React from "react";
-import { TypeGameObject } from "../../engine/types/objects/TypeGameObject";
 
 
 export function pipeFactory() {
@@ -29,7 +28,7 @@ export function pipeFactory() {
             active={true}
             height={781*0.6}
             width={860*0.4}
-            components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
+            components={[VelocityComponent, CollisionComponent, BoxCollisionComponent, CullingComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, upperPipeY),
                 scaleX: 0.4,
@@ -44,7 +43,7 @@ export function pipeFactory() {
             active={true}
             height={781*0.6}
             width={860*0.4}
-            components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
+            components={[VelocityComponent, CollisionComponent, BoxCollisionComponent, CullingComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, lowerPipeY),
                 scaleX: 0.4,
@@ -65,8 +64,13 @@ function Game() {
     // Start the game
     useEffect(() => {
         loop.start();
+        test();
         setInterval(test, 4000)
     }, []);
+
+    const playAudio = () => {
+        new Audio("/audio/kahoot.mp3").play();
+    }
 
     const test = () => {
         pipes.push(React.createElement(pipeFactory, {}));
