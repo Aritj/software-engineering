@@ -40,8 +40,10 @@ export class GameComponent {
         alt={this.gameObject.name}
         style={{
             position: "absolute",
-            animation: "balloon 15s infinite linear",
-            transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) scaleX(${this.gameObject.transform.scaleX}) scaleY(${this.gameObject.transform.scaleY})`,
+            width: `${this.gameObject.transform.width}px`,
+            height: `${this.gameObject.transform.height}px`,
+            transition: "0.1s",
+            transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) rotate(${this.gameObject.transform.rotation}deg)`,
             zIndex: `${this.gameObject.transform.z}`,
         }}
     />

@@ -6,8 +6,6 @@ export type TypeGameObject = {
     name: string;
     image: string;
     active: boolean;
-    height: number;
-    width: number;
     transform: TypeTransform;
     setActive(value: boolean): void;
 
