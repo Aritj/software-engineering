@@ -2,5 +2,6 @@
   "up": "w",
   "left": "a",
   "down": "s",
-  "right": "d"
+  "right": "d",
+  "debug": "x"
 }

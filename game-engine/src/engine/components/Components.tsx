@@ -1,3 +1,4 @@
+import { Debugger } from "../Debugger";
 import { GameComponent } from "../superClasses/GameComponent";
 import { Vector2D } from "../Vector2D";
 
@@ -12,7 +13,7 @@ export class PhysicsComponent extends GameComponent {
 
 export class CullingComponent extends GameComponent {
     public Update(dt: number): void {
-        if (this.transform.position.x < 0) {
+        if (this.transform.position.x < -200) {
             this.gameObject.components.forEach(component => {
                 component.enabled = false;
             })
@@ -29,20 +30,40 @@ export class VelocityComponent extends GameComponent {
     }
 }
 
+export class DebuggerComponent extends GameComponent {
+    private _subscribed = false;
+
+    public Start(): void {
+        Debugger.add(this);
+    }
+
+    public Update(dt: number): void {
+        if (!this._subscribed) {
+            Debugger.add(this);
+            this._subscribed = true;
+        }
+        super.Update(dt);
+    }
+
+
+
+    public Render(position: Vector2D): JSX.Element {
+        return <div
+            style={{
+                position: "absolute",
+                width: `${this.gameObject.transform.width}px`,
+                height: `${this.gameObject.transform.height}px`,
+                border: "3px solid red",
+                transition: "0.1s",
+                transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) rotate(${this.gameObject.transform.rotation}deg)`,
+                zIndex: `${this.gameObject.transform.z}`,
+            }}
+        />
+    }
+}
+
 export class CollisionComponent extends GameComponent {
     public Render(position: Vector2D): JSX.Element {
-        return <img
-        src={this.gameObject.image}
-        alt={this.gameObject.name}
-        style={{
-            position: "absolute",
-            width: `${this.gameObject.transform.width}px`,
-            height: `${this.gameObject.transform.height}px`,
-            border: "3px solid green",
-            transition: "0.1s",
-            transform: `translate(${this.gameObject.transform.position.x}px, ${this.gameObject.transform.position.y}px) rotate(${this.gameObject.transform.rotation}deg)`,
-            zIndex: `${this.gameObject.transform.z}`,
-        }}
-    />
+        return <></>;
     }
 }

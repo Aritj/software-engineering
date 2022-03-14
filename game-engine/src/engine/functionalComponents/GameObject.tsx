@@ -48,14 +48,14 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
     }, []);
 
     useEffect(() => {
-        console.log("Inside use effect");
-        
         loop.registerCollisionObjects(gameObject);
     }, []);
 
     return <Fragment>
         {components.map((comp, i) => {
-            //console.log(comp)
+            if (! comp.enabled) {
+                return <Fragment key={i}></Fragment>
+            }
             return <Fragment key={i + " : " + transform.position.x}>
                 {comp.Render(transform.position)}
             </Fragment>
