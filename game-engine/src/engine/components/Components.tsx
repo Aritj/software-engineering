@@ -5,9 +5,20 @@ export class PhysicsComponent extends GameComponent {
     multiplier: number = 0;
 
     public Update(dt: number): void {
-        this.multiplier += 0.2;
+        this.multiplier += 0.25;
         this.transform.setPosition(this.transform.position.add(Vector2D.down.multiply(this.multiplier)));
     }
+}
+
+export class CullingComponent extends GameComponent {
+    public Update(dt: number): void {
+        if (this.transform.position.x < 600) {
+            this.enabled = false;
+        }
+        console.log(this.enabled)
+    }
+    
+
 }
 
 export class VelocityComponent extends GameComponent {
@@ -19,8 +30,6 @@ export class VelocityComponent extends GameComponent {
 }
 
 export class CollisionComponent extends GameComponent {
-    //Collision.add(this)
-
     public Render(position: Vector2D): JSX.Element {
         return <img
         src={this.gameObject.image}
@@ -50,10 +59,9 @@ export class BoxCollisionComponent extends GameComponent  {
     }
 }
 
-export class CullingComponent extends GameComponent {
+export class CullingComponent2 extends GameComponent {
 
     public Update(dt: number): void {
-        console.log(this.transform.position.x)
         if (this.transform.position.x < 400) {
         }
     }

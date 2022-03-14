@@ -15,7 +15,7 @@ export function GameLoop(props: PropsWithChildren<{}>) {
     const updateLoop = (now: number) => {
         // Updates
         objects.forEach((obj) => {
-            obj.components.forEach((comp) => comp.enabled && comp.Update(now));
+            obj.active && obj.components.forEach((comp) => comp.enabled && comp.Update(now));
         });
 
         window.requestAnimationFrame(updateLoop);

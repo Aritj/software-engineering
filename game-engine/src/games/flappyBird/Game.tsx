@@ -65,20 +65,12 @@ function Game() {
     useEffect(() => {
         loop.start();
         test();
-        setInterval(test, 4000)
+        setInterval(test, 4000);
     }, []);
-
-    const playAudio = () => {
-        new Audio("/audio/kahoot.mp3").play();
-    }
 
     const test = () => {
         pipes.push(React.createElement(pipeFactory, {}));
         setPipes([...pipes])
-
-        pipes.forEach(pipe => {
-            console.log(pipe)
-        })
     }
 
     return (
@@ -99,7 +91,7 @@ function Game() {
             />
 
             {pipes.map((pipe, index) => {
-                return <Fragment key={index}>{console.log("key: " + index)}{pipe}</Fragment>;
+                return <Fragment key={index}>{pipe}</Fragment>;
             })}
 
             <GameObject
