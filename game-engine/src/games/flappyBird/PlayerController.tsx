@@ -17,7 +17,7 @@ export class PlayerController extends GameComponent {
                 component.multiplier = 0;
             }
         })
-        this.transform.position.add(Vector2D.up.multiply(64));
+        this.transform.position.add(Vector2D.up.multiply(32));
     }
 
     private onGoLeft() {

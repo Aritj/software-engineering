@@ -47,7 +47,7 @@ function Game() {
                 width={860*0.4}
                 components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
                 transform={{
-                    position: new Vector2D(0, 200),
+                    position: new Vector2D(600, 200),
                     scaleX: 0.4,
                     scaleY: 0.6,
                     z: 1,
@@ -62,7 +62,7 @@ function Game() {
                 width={860*0.4}
                 components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
                 transform={{
-                    position: new Vector2D(0, -400),
+                    position: new Vector2D(600, -400),
                     scaleX: 0.4,
                     scaleY: -0.6,
                     z: 1,
@@ -77,9 +77,24 @@ function Game() {
                 width={860*0.4}
                 components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
                 transform={{
-                    position: new Vector2D(700, 200),
+                    position: new Vector2D(1000, 150),
                     scaleX: 0.4,
                     scaleY: 0.6,
+                    z: 1,
+                }}
+            />
+
+           <GameObject
+                name={"Pipe"}
+                image={pipe}
+                active={true}
+                height={781*0.6}
+                width={860*0.4}
+                components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
+                transform={{
+                    position: new Vector2D(1000, -450),
+                    scaleX: 0.4,
+                    scaleY: -0.6,
                     z: 1,
                 }}
             />
