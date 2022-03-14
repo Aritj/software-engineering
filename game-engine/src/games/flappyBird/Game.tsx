@@ -12,6 +12,8 @@ import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
 import React from "react";
+import { TypeGameObject } from "../../engine/types/objects/TypeGameObject";
+
 
 export function pipeFactory() {
     const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
@@ -67,10 +69,12 @@ function Game() {
     }, []);
 
     const test = () => {
-        const element = React.createElement(pipeFactory);
-        pipes.push(element);
+        pipes.push(React.createElement(pipeFactory, {}));
         setPipes([...pipes])
-        console.log("Count: " + pipes.length)
+
+        pipes.forEach(pipe => {
+            console.log(pipe)
+        })
     }
 
     return (
@@ -81,7 +85,7 @@ function Game() {
                 active={true}
                 height={108*0.5}
                 width={153*0.5}
-                components={[PlayerController, PhysicsComponent, BoxCollisionComponent]}
+                components={[PlayerController, PhysicsComponent, CollisionComponent]}
                 transform={{
                     position: new Vector2D(0, 0),
                     scaleX: 0.5,
