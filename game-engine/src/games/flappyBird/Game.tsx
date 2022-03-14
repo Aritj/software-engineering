@@ -18,22 +18,22 @@ type pipeValues = {
 }
 
 export function pipeFactory() {
-
-    const variable: number = 0;
-
-
+    const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
+    const startingPositionX: number = 1200;
+    const lowerPipeY = 300 - variable;
+    const upperPipeY = -600 + lowerPipeY;
 
     return (
     <Fragment>
         <GameObject
-            name={"Pipe"}
+            name={"upperPipe"}
             image={pipe}
             active={true}
             height={781*0.6}
             width={860*0.4}
             components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
             transform={{
-                position: new Vector2D(600, -400),
+                position: new Vector2D(startingPositionX, upperPipeY),
                 scaleX: 0.4,
                 scaleY: -0.6,
                 z: 1,
@@ -41,14 +41,14 @@ export function pipeFactory() {
         />
 
         <GameObject
-            name={"Pipe"}
+            name={"lowerPipe"}
             image={pipe}
             active={true}
             height={781*0.6}
             width={860*0.4}
             components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
             transform={{
-                position: new Vector2D(600, 200),
+                position: new Vector2D(startingPositionX, lowerPipeY),
                 scaleX: 0.4,
                 scaleY: 0.6,
                 z: 1,
@@ -56,8 +56,6 @@ export function pipeFactory() {
         />
     </Fragment>);
 }
-
-let pipeArray: any[] = [];
 
 function Game() {
     const loop = useGameLoop();
@@ -71,35 +69,13 @@ function Game() {
     // Start the game
     useEffect(() => {
         loop.start();
-        console.log("here")
+
         const generatePipes = () => {
-            console.log(pipeArray)
-            pipeArray.push(React.createElement(pipeFactory, {}));
-            setPipes(pipeArray);
+            setPipes([...pipes, React.createElement(pipeFactory, {})])
         }
-        setInterval(generatePipes, 1000);
+
+        setInterval(generatePipes, 2000);
     }, []);
-
-
-    const test = useCallback(() => {
-        console.log("test")
-        const generatePipes = () => {
-            pipeArray.push(React.createElement(pipeFactory, {}));
-            //setPipes([...pipes, React.createElement(pipeFactory, {})])
-            //setPipes([...pipes, i++])//sadasd
-            /*
-            setPipes(current => {
-                current.push(i++);
-                return current;
-            })
-            */
-            //testsetsasdfasdfs
-        }
-        setInterval(generatePipes, 1000);
-    }, [])
-
-
-    //test();llll
 
     return (
         <Fragment>
@@ -118,8 +94,8 @@ function Game() {
                 }}
             />
 
-            {pipeArray.map((pipe, i) => {
-                return <Fragment key={i}>{pipe}</Fragment>;
+            {pipes.map((pipe, index) => {
+                return <Fragment key={index}>{console.log("key: " + index)}{pipe}</Fragment>;
             })}
 
             <GameObject
