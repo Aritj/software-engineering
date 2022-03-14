@@ -7,7 +7,7 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
-import { PhysicsComponent, VelocityComponent, CollisionComponent, BoxCollisionComponent, CullingComponent } from "../../engine/components/Components";
+import { PhysicsComponent, VelocityComponent, CollisionComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
@@ -18,7 +18,7 @@ export function pipeFactory() {
     const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
     const startingPositionX: number = 1200;
     const lowerPipeY = 300 - variable;
-    const upperPipeY = -600 + lowerPipeY;
+    const upperPipeY = lowerPipeY - 600;
 
     return (
     <Fragment>
@@ -28,7 +28,7 @@ export function pipeFactory() {
             active={true}
             height={781*0.6}
             width={860*0.4}
-            components={[VelocityComponent, CollisionComponent, BoxCollisionComponent, CullingComponent]}
+            components={[VelocityComponent, CollisionComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, upperPipeY),
                 scaleX: 0.4,
@@ -43,7 +43,7 @@ export function pipeFactory() {
             active={true}
             height={781*0.6}
             width={860*0.4}
-            components={[VelocityComponent, CollisionComponent, BoxCollisionComponent, CullingComponent]}
+            components={[VelocityComponent, CollisionComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, lowerPipeY),
                 scaleX: 0.4,

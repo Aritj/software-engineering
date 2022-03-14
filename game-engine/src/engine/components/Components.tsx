@@ -11,14 +11,6 @@ export class PhysicsComponent extends GameComponent {
 }
 
 export class CullingComponent extends GameComponent {
-    public Update(dt: number): void {
-        if (this.transform.position.x < 600) {
-            this.enabled = false;
-        }
-        console.log(this.enabled)
-    }
-    
-
 }
 
 export class VelocityComponent extends GameComponent {
@@ -42,32 +34,5 @@ export class CollisionComponent extends GameComponent {
             zIndex: `${this.gameObject.transform.z}`,
         }}
     />
-    }
-}
-
-export class BoxCollisionComponent extends GameComponent  {
-    public Render(position: Vector2D): JSX.Element {
-        return <div
-        style={{
-            position: "absolute",
-            transform: `translate(${(this.transform.position.x + (1/2*this.gameObject.width))}px, ${this.transform.position.y}px)`,
-            width: this.gameObject.width,
-            height: this.gameObject.height,
-            /*background: "red"*/
-        }}
-    />
-    }
-}
-
-export class CullingComponent2 extends GameComponent {
-
-    public Update(dt: number): void {
-        if (this.transform.position.x < 400) {
-        }
-    }
-
-    public Render(position: Vector2D): JSX.Element {
-        // no need to render.
-        return <></>;
     }
 }
