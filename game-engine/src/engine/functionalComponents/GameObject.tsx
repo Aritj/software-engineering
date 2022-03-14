@@ -47,6 +47,12 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
         loop.registerObject(gameObject);
     }, []);
 
+    useEffect(() => {
+        console.log("Inside use effect");
+        
+        loop.registerCollisionObjects(gameObject);
+    }, []);
+
     return <Fragment>
         {components.map((comp, i) => {
             //console.log(comp)
