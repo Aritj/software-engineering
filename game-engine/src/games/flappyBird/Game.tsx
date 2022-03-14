@@ -26,13 +26,12 @@ export function pipeFactory() {
             name={"upperPipe"}
             image={pipe}
             active={true}
-            height={781*0.6}
-            width={860*0.4}
             components={[VelocityComponent, CollisionComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, upperPipeY),
-                scaleX: 0.4,
-                scaleY: -0.6,
+                rotation: 180,
+                width: 100,
+                height: 400,
                 z: 1,
             }}
         />
@@ -41,13 +40,11 @@ export function pipeFactory() {
             name={"lowerPipe"}
             image={pipe}
             active={true}
-            height={781*0.6}
-            width={860*0.4}
             components={[VelocityComponent, CollisionComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, lowerPipeY),
-                scaleX: 0.4,
-                scaleY: 0.6,
+                width: 100,
+                height: 400,
                 z: 1,
             }}
         />
@@ -79,13 +76,11 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
-                height={108*0.5}
-                width={153*0.5}
                 components={[PlayerController, PhysicsComponent, CollisionComponent]}
                 transform={{
                     position: new Vector2D(0, 0),
-                    scaleX: 0.5,
-                    scaleY: 0.5,
+                    width: 80,
+                    height: 60,
                     z: 3,
                 }}
             />
@@ -98,13 +93,11 @@ function Game() {
                 name={"Background"}
                 image={background}
                 active={true}
-                height={600}
-                width={1400}
                 components={[GameComponent]}
                 transform={{
-                    position: new Vector2D(150, 10),
-                    scaleX: 1.4,
-                    scaleY: 1.3,
+                    position: new Vector2D(0, 0),
+                    width: 1400,
+                    height: 610,
                     z: -1,
                 }}
             />
