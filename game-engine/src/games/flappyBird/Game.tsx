@@ -7,9 +7,10 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
-import { BackgroundComponent, PhysicsComponent, VelocityComponent, CollisionComponent } from "../../engine/components/Components";
+import { PhysicsComponent, VelocityComponent, CollisionComponent, BoxCollisionComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
+import { GameComponent } from "../../engine/superClasses/GameComponent";
 
 function Game() {
     const loop = useGameLoop();
@@ -27,9 +28,11 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
-                components={[PlayerController, PhysicsComponent, CollisionComponent]}
+                height={108*0.5}
+                width={153*0.5}
+                components={[PlayerController, PhysicsComponent, CollisionComponent, BoxCollisionComponent]}
                 transform={{
-                    position: new Vector2D(100, 100),
+                    position: new Vector2D(0, 0),
                     scaleX: 0.5,
                     scaleY: 0.5,
                     z: 3,
@@ -40,7 +43,9 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[VelocityComponent, CollisionComponent]}
+                height={781*0.6}
+                width={860*0.4}
+                components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
                 transform={{
                     position: new Vector2D(0, 200),
                     scaleX: 0.4,
@@ -53,9 +58,11 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[VelocityComponent, CollisionComponent]}
+                height={781*0.6}
+                width={860*0.4}
+                components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
                 transform={{
-                    position: new Vector2D(350, -200),
+                    position: new Vector2D(0, -400),
                     scaleX: 0.4,
                     scaleY: -0.6,
                     z: 1,
@@ -66,7 +73,9 @@ function Game() {
                 name={"Pipe"}
                 image={pipe}
                 active={true}
-                components={[VelocityComponent, CollisionComponent]}
+                height={781*0.6}
+                width={860*0.4}
+                components={[VelocityComponent, CollisionComponent, BoxCollisionComponent]}
                 transform={{
                     position: new Vector2D(700, 200),
                     scaleX: 0.4,
@@ -79,7 +88,9 @@ function Game() {
                 name={"Background"}
                 image={background}
                 active={true}
-                components={[BackgroundComponent]}
+                height={600}
+                width={1400}
+                components={[GameComponent]}
                 transform={{
                     position: new Vector2D(150, 10),
                     scaleX: 1.4,

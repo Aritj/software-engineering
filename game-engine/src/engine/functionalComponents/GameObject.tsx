@@ -14,6 +14,8 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
     const [name, setName] = useState(props.name);
     const [image, setImage] = useState(props.image);
     const [active, setActive] = useState(props.active);
+    const [height, setHeight] = useState(props.height);
+    const [width, setWidth] = useState(props.width);
     const transform = Transform(props.transform);
 
     const [components, setComponents] = useState<GameComponent[]>([]);
@@ -22,6 +24,8 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
            name,
            image,
            active,
+           height,
+           width,
            setActive,
            transform,
            components: components,
@@ -49,7 +53,7 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
 
     return <Fragment>
         {components.map((comp, i) => {
-            console.log(comp)
+            //console.log(comp)
             return <Fragment key={i + " : " + transform.position.x}>
                 {comp.Render(transform.position)}
             </Fragment>

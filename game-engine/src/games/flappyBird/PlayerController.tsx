@@ -1,6 +1,7 @@
 import { Vector2D } from "../../engine/Vector2D";
 import { InputSystem } from "../../engine/input/InputSystem";
 import { GameComponent } from "../../engine/superClasses/GameComponent";
+import { PhysicsComponent } from "../../engine/components/Components";
 
 export class PlayerController extends GameComponent {
     public Start(): void {
@@ -11,6 +12,11 @@ export class PlayerController extends GameComponent {
     }
 
     private onGoUp() {
+        this.gameObject.components.forEach(component => {
+            if (component instanceof PhysicsComponent) {
+                component.multiplier = 0;
+            }
+        })
         this.transform.position.add(Vector2D.up.multiply(64));
     }
 
