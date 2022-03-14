@@ -1,7 +1,7 @@
 import "../../App.css";
 import { GameObject } from "../../engine/functionalComponents/GameObject";
 import { Vector2D } from "../../engine/Vector2D";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useGameLoop } from "../../engine/loop";
 import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
@@ -12,10 +12,6 @@ import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
 import React from "react";
-
-type pipeValues = {
-
-}
 
 export function pipeFactory() {
     const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
@@ -60,22 +56,22 @@ export function pipeFactory() {
 function Game() {
     const loop = useGameLoop();
 
-    const [pipes, setPipes] = useState<any[]>([]);
+    const [pipes, setPipes] = useState<React.FunctionComponentElement<{}>[]>([]);
 
     InputSystem.initialize(inputs);
-
-    console.log(pipes)
 
     // Start the game
     useEffect(() => {
         loop.start();
-
-        const generatePipes = () => {
-            setPipes([...pipes, React.createElement(pipeFactory, {})])
-        }
-
-        setInterval(generatePipes, 2000);
+        setInterval(test, 4000)
     }, []);
+
+    const test = () => {
+        const element = React.createElement(pipeFactory);
+        pipes.push(element);
+        setPipes([...pipes])
+        console.log("Count: " + pipes.length)
+    }
 
     return (
         <Fragment>

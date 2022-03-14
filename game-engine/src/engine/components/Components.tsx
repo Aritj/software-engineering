@@ -11,7 +11,7 @@ export class PhysicsComponent extends GameComponent {
 }
 
 export class VelocityComponent extends GameComponent {
-    multiplier: number = 1;
+    multiplier: number = 2;
 
     public Update(dt: number): void {
         this.transform.setPosition(this.transform.position.add(Vector2D.left.multiply(this.multiplier)));
@@ -19,6 +19,8 @@ export class VelocityComponent extends GameComponent {
 }
 
 export class CollisionComponent extends GameComponent {
+    //Collision.add(this)
+
     public Render(position: Vector2D): JSX.Element {
         return <img
         src={this.gameObject.image}
