@@ -16,24 +16,18 @@ import React from "react";
 
 export function pipeFactory() {
     const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
-    const startingPositionX: number = 600;
-    const lowerPipeY = 300 - variable;
+    const startingPositionX: number = 1400;
+    const lowerPipeY = 400 - variable;
     const upperPipeY = lowerPipeY - 600;
 
     return (
     <Fragment>
-        {/*
+        
         <GameObject
             name={"upperPipe"}
             image={pipe}
             active={true}
-
-            height={781*0.6}
-            width={860*0.4}
-            components={[CollisionComponent, BoxCollisionComponent]}
-
-            components={[VelocityComponent, CollisionComponent]}
-
+            components={[CollisionComponent, VelocityComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, upperPipeY),
                 rotation: 180,
@@ -41,18 +35,13 @@ export function pipeFactory() {
                 height: 400,
                 z: 1,
             }}
-        />*/}
+        />
 
         <GameObject
             name={"lowerPipe"}
             image={pipe}
             active={true}
-
-            
-            components={[CollisionComponent]}
-
-
-
+            components={[CollisionComponent, VelocityComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, lowerPipeY),
                 width: 100,
@@ -77,11 +66,7 @@ function Game() {
     useEffect(() => {
         loop.start();
         test();
-
-        //setInterval(test, 4000)
-
-
-
+        setInterval(test, 4000)
     }, []);
 
     const test = () => {
@@ -95,13 +80,7 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
-
-                
-                
-                components={[PlayerController, /*PhysicsComponent,*/ CollisionComponent]}
-
-
-
+                components={[PlayerController, PhysicsComponent, CollisionComponent]}
                 transform={{
                     position: new Vector2D(0, 0),
                     width: 80,
