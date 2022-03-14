@@ -47,10 +47,10 @@ export function GameLoop(props: PropsWithChildren<{}>) {
                     continue;
                 }
 
-                if ((current.transform.position.x < (collisionObject[j].transform.position.x + collisionObject[j].width)) &&
-                    ((current.transform.position.x + current.width) > collisionObject[j].transform.position.x) &&
-                    (current.transform.position.y < (collisionObject[j].transform.position.y + collisionObject[j].height)) &&
-                    ((current.height + current.transform.position.y) > collisionObject[j].transform.position.y)) {
+                if ((current.transform.position.x < (collisionObject[j].transform.position.x + collisionObject[j].transform.width)) &&
+                    ((current.transform.position.x + current.transform.width) > collisionObject[j].transform.position.x) &&
+                    (current.transform.position.y < (collisionObject[j].transform.position.y + collisionObject[j].transform.height)) &&
+                    ((current.transform.height + current.transform.position.y) > collisionObject[j].transform.position.y)) {
                     console.log("Collision");
 
                 }
