@@ -1,16 +1,13 @@
-import {PropsWithChildren, useCallback, useState} from "react";
-import {PlayerController} from "../../games/flappyBird/PlayerController";
-import { useCollision } from "../Collision/useCollision";
-import {CollisionComponent} from "../components/Components";
-import {GameComponent} from "../superClasses/GameComponent";
-import {TypeGameObject} from "../types/objects/TypeGameObject";
-import {GameLoopContext} from "./GameLoopContext";
+import { PropsWithChildren, useCallback, useState } from "react";
+import { ColSys } from "../Collision/ColSys";
+import { TypeGameObject } from "../types/objects/TypeGameObject";
+import { GameLoopContext } from "./GameLoopContext";
 
 
 export function GameLoop(props: PropsWithChildren<{}>) {
-    const [objects, setObject] = useState<TypeGameObject[]>([]);
+    ColSys.initialize(); //initialize static collision system
 
-    const {registerCollisionObjects, checkCollision} = useCollision();
+    const [objects, setObject] = useState<TypeGameObject[]>([]);
 
     const registerObject = (gameObject: TypeGameObject) => {
         setObject((objects) => {
@@ -26,11 +23,12 @@ export function GameLoop(props: PropsWithChildren<{}>) {
         objects.forEach((obj) => {
             obj.active && obj.components.forEach((comp) => comp.enabled && comp.Update(now));
         });
-        checkCollision();
+        ColSys.checkCollision(); // check for Collisions
         window.requestAnimationFrame(updateLoop);
     };
 
     const start = useCallback(() => {
+        
         objects.forEach((obj) => {
             obj.components.forEach((comp) => comp.Start());
         });

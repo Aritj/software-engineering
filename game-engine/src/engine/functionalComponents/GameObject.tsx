@@ -1,23 +1,18 @@
-import { PropsWithChildren, useState } from "react";
-import { GameComponent } from "../superClasses/GameComponent";
-import { Transform } from "./Transform";
-import { PropsGameObject } from "../types/props/PropsGameObject";
-import { Fragment, useEffect, useLayoutEffect } from "react";
-import { TypeGameObject } from "../types/objects/TypeGameObject";
-import { GameComponentInstanceDefinition } from "../superClasses/GameComponent";
+import { Fragment, PropsWithChildren, useEffect, useLayoutEffect, useState } from "react";
+import { ColSys } from "../Collision/ColSys";
 import { useGameLoop } from "../loop";
-import { useCollision } from "../Collision/useCollision";
+import { GameComponent, GameComponentInstanceDefinition } from "../superClasses/GameComponent";
+import { TypeGameObject } from "../types/objects/TypeGameObject";
+import { PropsGameObject } from "../types/props/PropsGameObject";
+import { Transform } from "./Transform";
 
 
 export function GameObject(props: PropsWithChildren<PropsGameObject>) {
     const loop = useGameLoop();
-    const collision = useCollision();
-
     const [name, setName] = useState(props.name);
     const [image, setImage] = useState(props.image);
     const [active, setActive] = useState(props.active);
     const transform = Transform(props.transform);
-
     const [components, setComponents] = useState<GameComponent[]>([]);
 
        const gameObject: TypeGameObject = {
@@ -40,19 +35,14 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
                return newComp;
            },
        };
-
+    
     useLayoutEffect(() => {
         props.components.forEach(comp => gameObject.addComponent(comp, true));
     }, []);
 
     useEffect(() => {
         loop.registerObject(gameObject);
-    }, []);
-
-    useEffect(() => {
-        console.log("Inside use effect");
-        
-        collision.registerCollisionObjects(gameObject);
+        ColSys.registerCollisionObjects(gameObject);
     }, []);
 
     return <Fragment>
