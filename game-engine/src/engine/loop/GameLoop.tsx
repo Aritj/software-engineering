@@ -1,5 +1,6 @@
 import {PropsWithChildren, useCallback, useState} from "react";
 import {CollisionComponent} from "../components/Components";
+import { DebuggerSystem } from "../DebuggerSystem";
 import {TypeGameObject} from "../types/objects/TypeGameObject";
 import {GameLoopContext} from "./GameLoopContext";
 
@@ -7,7 +8,6 @@ import {GameLoopContext} from "./GameLoopContext";
 export function GameLoop(props: PropsWithChildren<{}>) {
     const [objects, setObject] = useState<TypeGameObject[]>([]);
     const [collisionObject, setCollisionObject] = useState<TypeGameObject[]>([]);
-
 
     const registerObject = (gameObject: TypeGameObject) => {
         setObject((objects) => {
@@ -52,9 +52,12 @@ export function GameLoop(props: PropsWithChildren<{}>) {
     }
 
     const updateLoop = (now: number) => {
-        // Updates
+        
         objects.forEach((obj) => {
-            obj.active && obj.components.forEach((comp) => comp.enabled && comp.Update(now));
+            obj.active && obj.components.forEach((comp) => {
+                comp.Update(now);
+                // comp.enabled ? comp.Update(now) : console.log(comp) // OLD VERSION
+            });
         });
 
         checkCollision();

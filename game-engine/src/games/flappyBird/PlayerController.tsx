@@ -2,7 +2,7 @@ import { Vector2D } from "../../engine/Vector2D";
 import { InputSystem } from "../../engine/input/InputSystem";
 import { GameComponent } from "../../engine/superClasses/GameComponent";
 import { PhysicsComponent } from "../../engine/components/Components";
-import { Debugger } from "../../engine/Debugger";
+import { DebuggerSystem } from "../../engine/DebuggerSystem";
 
 export class PlayerController extends GameComponent {
     public Start(): void {
@@ -36,7 +36,7 @@ export class PlayerController extends GameComponent {
     }
 
     private debugSwitch() {
-        Debugger.switch();
+        DebuggerSystem.switch();
     }
 
 

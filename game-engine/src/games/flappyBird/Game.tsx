@@ -7,7 +7,7 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
-import { PhysicsComponent, VelocityComponent, CollisionComponent, CullingComponent, DebuggerComponent } from "../../engine/components/Components";
+import { PhysicsComponent, VelocityComponent, DebuggerComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
@@ -16,7 +16,7 @@ import React from "react";
 
 export function pipeFactory() {
     const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
-    const startingPositionX: number = 600;
+    const startingPositionX: number = 1200;
     const lowerPipeY = 400 - variable;
     const upperPipeY = lowerPipeY - 600;
 

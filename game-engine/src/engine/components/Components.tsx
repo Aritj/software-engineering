@@ -1,4 +1,4 @@
-import { Debugger } from "../Debugger";
+import { DebuggerSystem, DebuggerObserver } from "../DebuggerSystem";
 import { GameComponent } from "../superClasses/GameComponent";
 import { Vector2D } from "../Vector2D";
 
@@ -28,25 +28,22 @@ export class VelocityComponent extends GameComponent {
     public Update(dt: number): void {
         this.transform.setPosition(this.transform.position.add(Vector2D.left.multiply(this.multiplier)));
     }
+
 }
 
 export class DebuggerComponent extends GameComponent {
     private _subscribed = false;
 
-    public Start(): void {
-        Debugger.add(this);
-    }
-
     public Update(dt: number): void {
-        if (!this._subscribed) {
-            Debugger.add(this);
+        if (! this._subscribed) {
+            DebuggerSystem.add(this);
             this._subscribed = true;
+            this.enabled = DebuggerSystem.getDebugStatus();
         }
+
         super.Update(dt);
     }
-
-
-
+    
     public Render(position: Vector2D): JSX.Element {
         return <div
             style={{
