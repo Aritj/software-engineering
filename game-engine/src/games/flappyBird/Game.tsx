@@ -7,7 +7,7 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
-import { PhysicsComponent, VelocityComponent, DebuggerComponent } from "../../engine/components/Components";
+import { PhysicsComponent, VelocityComponent, DebuggerComponent, CollisionComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
@@ -27,7 +27,7 @@ export function pipeFactory() {
             name={"upperPipe"}
             image={pipe}
             active={true}
-            components={[VelocityComponent, DebuggerComponent]}
+            components={[VelocityComponent, DebuggerComponent, CollisionComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, upperPipeY),
                 rotation: 180,
@@ -41,7 +41,7 @@ export function pipeFactory() {
             name={"lowerPipe"}
             image={pipe}
             active={true}
-            components={[VelocityComponent, DebuggerComponent]}
+            components={[VelocityComponent, DebuggerComponent, CollisionComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, lowerPipeY),
                 width: 100,
@@ -89,7 +89,7 @@ function Game() {
 
 
 
-                components={[PlayerController, PhysicsComponent, DebuggerComponent]}
+                components={[PlayerController, PhysicsComponent, DebuggerComponent, CollisionComponent]}
 
                 transform={{
                     position: new Vector2D(0, 0),
