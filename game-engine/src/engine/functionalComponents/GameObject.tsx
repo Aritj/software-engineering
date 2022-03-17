@@ -1,6 +1,5 @@
 import { Fragment, PropsWithChildren, useEffect, useLayoutEffect, useState } from "react";
-import { ColSys } from "../Collision/CollisionSystem";
-import { PhysicsComponent } from "../components/Components";
+import { CollisionSystem } from "../Collision/CollisionSystem";
 import { useGameLoop } from "../loop";
 import { GameComponent, GameComponentInstanceDefinition } from "../superClasses/GameComponent";
 import { TypeGameObject } from "../types/objects/TypeGameObject";
@@ -35,33 +34,7 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
                });
                return newComp;
            },
-           
-           /**
-            * Game specific
-            * @param current
-            * @param next 
-            */
-           onTriggered: (current: TypeGameObject, next: TypeGameObject) => {
-
-                if (current.name == "Bird") {
-                    
-                    if (next.name == "lowerPipe" || next.name == "upperPipe") {
-                        const physics = current.getComponent(PhysicsComponent);
-                        
-                        
-                        for (let index = 0; index < 1000; index++) {
-                            physics?.Update(0);
-                        }
-
-                        console.log(physics);
-                        
-                        physics?.Update(100);
-                        console.log("bei");
-                        
-                    }
-                }
-
-           }
+        
        };
     
     useLayoutEffect(() => {
@@ -70,7 +43,7 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
 
     useEffect(() => {
         loop.registerObject(gameObject);
-        ColSys.registerCollisionObjects(gameObject);
+        CollisionSystem.registerCollisionObjects(gameObject);
     }, []);
     
 
@@ -83,8 +56,4 @@ export function GameObject(props: PropsWithChildren<PropsGameObject>) {
         })}
         {props.children}
     </Fragment>
-}
-
-function Physics(Physics: any) {
-    throw new Error("Function not implemented.");
 }

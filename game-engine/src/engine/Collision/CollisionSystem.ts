@@ -1,6 +1,7 @@
 import { CollisionComponent } from "../components/Components";
 import { TypeGameObject } from "../types/objects/TypeGameObject"
 import { v4 as uuidv4 } from "uuid";
+import { TriggerSystem } from "./TriggerSystem";
 
 interface IMyGameObjType {
     obj: TypeGameObject,
@@ -8,14 +9,14 @@ interface IMyGameObjType {
     _bool: boolean
 }
 
-export class ColSys {
-    private static _instance: ColSys;
+export class CollisionSystem {
+    private static _instance: CollisionSystem;
     private constructor() { }
     collisionObject: IMyGameObjType[] = [];
 
     public static initialize(): void {
         if (! this._instance) {
-            this._instance = new ColSys();
+            this._instance = new CollisionSystem();
         }
     }
 
@@ -51,7 +52,8 @@ export class ColSys {
 
                 if (collision(current, this._instance.collisionObject[j])) {
                     //current.obj.onTriggered(current.obj, this._instance.collisionObject[j].obj)
-                    current.obj.onTriggered(current.obj, this._instance.collisionObject[j].obj);
+                    
+                    TriggerSystem.onTriggered(current.obj, this._instance.collisionObject[j].obj);
                     console.log("Collision");
                     
 

@@ -22,7 +22,7 @@ export class GameComponent {
         return this._enabled;
     }
 
-    public set enabled(value: boolean) {
+    public setEnabled(value: boolean) {
         this._enabled = value;
     }
 

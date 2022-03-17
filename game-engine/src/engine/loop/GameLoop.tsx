@@ -1,11 +1,13 @@
 import { PropsWithChildren, useCallback, useState } from "react";
-import { ColSys } from "../Collision/CollisionSystem";
+import { CollisionSystem } from "../Collision/CollisionSystem";
+import { TriggerSystem } from "../Collision/TriggerSystem";
 import { TypeGameObject } from "../types/objects/TypeGameObject";
 import { GameLoopContext } from "./GameLoopContext";
 
 
 export function GameLoop(props: PropsWithChildren<{}>) {
-    ColSys.initialize(); //initialize static collision system
+    CollisionSystem.initialize(); //initialize static collision system
+    TriggerSystem.initialize();
 
     const [objects, setObject] = useState<TypeGameObject[]>([]);
 
@@ -23,7 +25,7 @@ export function GameLoop(props: PropsWithChildren<{}>) {
         objects.forEach((obj) => {
             obj.active && obj.components.forEach((comp) => comp.enabled && comp.Update(now));
         });
-        ColSys.checkCollision(); // check for Collisions
+        CollisionSystem.checkCollision(); // check for Collisions
         window.requestAnimationFrame(updateLoop);
     };
 
