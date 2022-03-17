@@ -55,8 +55,7 @@ export function GameLoop(props: PropsWithChildren<{}>) {
         
         objects.forEach((obj) => {
             obj.active && obj.components.forEach((comp) => {
-                comp.Update(now);
-                // comp.enabled ? comp.Update(now) : console.log(comp) // OLD VERSION
+                comp.enabled ? comp.Update(now) : console.log(comp)
             });
         });
 

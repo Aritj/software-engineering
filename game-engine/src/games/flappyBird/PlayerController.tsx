@@ -7,9 +7,6 @@ import { DebuggerSystem } from "../../engine/DebuggerSystem";
 export class PlayerController extends GameComponent {
     public Start(): void {
         InputSystem.add("w", this.onGoUp.bind(this));
-        InputSystem.add("a", this.onGoLeft.bind(this));
-        InputSystem.add("s", this.onGoDown.bind(this));
-        InputSystem.add("d", this.onGoRight.bind(this));
         InputSystem.add("x", this.debugSwitch.bind(this));
     }
 
@@ -36,6 +33,21 @@ export class PlayerController extends GameComponent {
     }
 
     private debugSwitch() {
+        if (! DebuggerSystem.getDebugStatus()) {
+            InputSystem.add("a", this.onGoLeft.bind(this));
+            InputSystem.add("s", this.onGoDown.bind(this));
+            InputSystem.add("d", this.onGoRight.bind(this));
+        } else {
+            InputSystem.remove("a");
+            InputSystem.remove("s");
+            InputSystem.remove("d");
+        }
+        
+        this.gameObject.components.forEach(comp => {
+            if (comp instanceof PhysicsComponent) {
+                comp.enabled = DebuggerSystem.getDebugStatus();
+            }
+        })
         DebuggerSystem.switch();
     }
 
