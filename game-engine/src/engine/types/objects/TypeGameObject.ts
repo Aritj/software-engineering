@@ -13,4 +13,5 @@ export type TypeGameObject = {
 
     getComponent<TComponent extends GameComponent>(type: GameComponentInstanceDefinition<TComponent>): TComponent | null;
     addComponent<TComponent extends GameComponent>(type: GameComponentInstanceDefinition<TComponent>, enabled: boolean): TComponent
+    onTriggered(current: TypeGameObject, next: TypeGameObject): void
 };

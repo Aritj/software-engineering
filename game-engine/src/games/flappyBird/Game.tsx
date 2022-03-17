@@ -12,7 +12,6 @@ import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
 import React from "react";
-import { CollisionSystem } from "../../engine/Collision/CollisionSystem";
 
 
 export function pipeFactory() {
@@ -99,7 +98,7 @@ function Game() {
 
                 
                 
-                components={[PlayerController, /*PhysicsComponent,*/ CollisionComponent]}
+                components={[PlayerController, PhysicsComponent, CollisionComponent]}
 
 
 
