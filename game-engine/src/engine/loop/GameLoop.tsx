@@ -1,15 +1,22 @@
-import { PropsWithChildren, useCallback, useState } from "react";
+
+
 import { CollisionSystem } from "../Collision/CollisionSystem";
 import { TriggerSystem } from "../Collision/TriggerSystem";
-import { TypeGameObject } from "../types/objects/TypeGameObject";
-import { GameLoopContext } from "./GameLoopContext";
+import {PropsWithChildren, useCallback, useState} from "react";
+import {CollisionComponent} from "../components/Components";
+import { DebuggerSystem } from "../DebuggerSystem";
+import {TypeGameObject} from "../types/objects/TypeGameObject";
+import {GameLoopContext} from "./GameLoopContext";
+
 
 
 export function GameLoop(props: PropsWithChildren<{}>) {
     CollisionSystem.initialize(); //initialize static collision system
     TriggerSystem.initialize();
 
+
     const [objects, setObject] = useState<TypeGameObject[]>([]);
+
 
     const registerObject = (gameObject: TypeGameObject) => {
         setObject((objects) => {
@@ -19,13 +26,20 @@ export function GameLoop(props: PropsWithChildren<{}>) {
     };
 
 
+
     const updateLoop = (now: number) => {
         // Updates
+
         
         objects.forEach((obj) => {
-            obj.active && obj.components.forEach((comp) => comp.enabled && comp.Update(now));
+            obj.active && obj.components.forEach((comp) => {
+                comp.Update(now);
+                // comp.enabled ? comp.Update(now) : console.log(comp) // OLD VERSION
+            });
         });
+
         CollisionSystem.checkCollision(); // check for Collisions
+
         window.requestAnimationFrame(updateLoop);
     };
 
