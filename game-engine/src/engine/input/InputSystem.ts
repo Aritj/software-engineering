@@ -27,6 +27,14 @@ export class InputSystem {
     public static add(key: string, onTriggered: () => void): void {
         this._instance.addTrigger(key, onTriggered);
     }
+
+    public static remove(key: string): void {
+        this._instance.removeTrigger(key);
+    }
+
+    private removeTrigger(key: string): void {
+        this._triggers[key] = [];
+    }
   
     private isValidMove(key: string): boolean {
         return Object.values(this._data).includes(key);

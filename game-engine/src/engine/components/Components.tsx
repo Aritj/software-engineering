@@ -1,4 +1,4 @@
-import { DebuggerSystem, DebuggerObserver } from "../DebuggerSystem";
+import { DebuggerSystem } from "../DebuggerSystem";
 import { GameComponent } from "../superClasses/GameComponent";
 import { Vector2D } from "../Vector2D";
 
@@ -33,18 +33,22 @@ export class VelocityComponent extends GameComponent {
 
 export class DebuggerComponent extends GameComponent {
     private _subscribed = false;
+    public _active = false;
 
     public Update(dt: number): void {
         if (! this._subscribed) {
             DebuggerSystem.add(this);
             this._subscribed = true;
-            this.enabled = DebuggerSystem.getDebugStatus();
+            this._active = DebuggerSystem.getDebugStatus();
         }
 
         super.Update(dt);
     }
     
     public Render(position: Vector2D): JSX.Element {
+        if (! this._active) {
+            return <></>;
+        }
         return <div
             style={{
                 position: "absolute",

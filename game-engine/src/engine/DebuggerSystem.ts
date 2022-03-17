@@ -24,7 +24,7 @@ export class DebuggerSystem {
         this._debugActive = ! this._debugActive;
 
         this.instance._debuggerComponents.forEach(debuggerComponent => {
-            debuggerComponent.enabled = this._debugActive;
+            debuggerComponent._active = this._debugActive;
         });
         
     }
