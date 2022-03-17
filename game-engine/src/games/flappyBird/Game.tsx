@@ -80,7 +80,17 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
+
+
+                
+                
+                //components={[PlayerController, PhysicsComponent, CollisionComponent]}
+
+
+
+
                 components={[PlayerController, PhysicsComponent, DebuggerComponent]}
+
                 transform={{
                     position: new Vector2D(0, 0),
                     width: 80,
