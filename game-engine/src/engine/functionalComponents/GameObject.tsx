@@ -1,5 +1,5 @@
 import { Fragment, PropsWithChildren, useEffect, useLayoutEffect, useState } from "react";
-import { ColSys } from "../Collision/ColSys";
+import { ColSys } from "../Collision/CollisionSystem";
 import { PhysicsComponent } from "../components/Components";
 import { useGameLoop } from "../loop";
 import { GameComponent, GameComponentInstanceDefinition } from "../superClasses/GameComponent";

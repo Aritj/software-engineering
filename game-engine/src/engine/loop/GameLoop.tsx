@@ -1,5 +1,5 @@
 import { PropsWithChildren, useCallback, useState } from "react";
-import { ColSys } from "../Collision/ColSys";
+import { ColSys } from "../Collision/CollisionSystem";
 import { TypeGameObject } from "../types/objects/TypeGameObject";
 import { GameLoopContext } from "./GameLoopContext";
 
