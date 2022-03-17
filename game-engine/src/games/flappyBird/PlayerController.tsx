@@ -45,7 +45,7 @@ export class PlayerController extends GameComponent {
         
         this.gameObject.components.forEach(comp => {
             if (comp instanceof PhysicsComponent) {
-                comp.enabled = DebuggerSystem.getDebugStatus();
+                comp.setEnabled(DebuggerSystem.getDebugStatus());
             }
         })
         DebuggerSystem.switch();

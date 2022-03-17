@@ -11,16 +11,6 @@ export class PhysicsComponent extends GameComponent {
     }
 }
 
-export class CullingComponent extends GameComponent {
-    public Update(dt: number): void {
-        if (this.transform.position.x < -200) {
-            this.gameObject.components.forEach(component => {
-                component.enabled = false;
-            })
-            this.gameObject.setActive(false);
-        }
-    }
-}
 
 export class VelocityComponent extends GameComponent {
     multiplier: number = 2;
