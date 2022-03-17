@@ -2,6 +2,7 @@ import { Vector2D } from "../../engine/Vector2D";
 import { InputSystem } from "../../engine/input/InputSystem";
 import { GameComponent } from "../../engine/superClasses/GameComponent";
 import { PhysicsComponent } from "../../engine/components/Components";
+import { DebuggerSystem } from "../../engine/DebuggerSystem";
 
 export class PlayerController extends GameComponent {
     public Start(): void {
@@ -9,6 +10,7 @@ export class PlayerController extends GameComponent {
         InputSystem.add("a", this.onGoLeft.bind(this));
         InputSystem.add("s", this.onGoDown.bind(this));
         InputSystem.add("d", this.onGoRight.bind(this));
+        InputSystem.add("x", this.debugSwitch.bind(this));
     }
 
     private onGoUp() {
@@ -32,5 +34,10 @@ export class PlayerController extends GameComponent {
     private onGoRight() {
         this.transform.position.add(Vector2D.right.multiply(32));
     }
+
+    private debugSwitch() {
+        DebuggerSystem.switch();
+    }
+
 
 }

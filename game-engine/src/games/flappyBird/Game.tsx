@@ -7,7 +7,7 @@ import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
 import { PlayerController } from "./PlayerController";
-import { PhysicsComponent, VelocityComponent, CollisionComponent } from "../../engine/components/Components";
+import { PhysicsComponent, VelocityComponent, DebuggerComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
@@ -16,7 +16,7 @@ import React from "react";
 
 export function pipeFactory() {
     const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
-    const startingPositionX: number = 1400;
+    const startingPositionX: number = 1200;
     const lowerPipeY = 400 - variable;
     const upperPipeY = lowerPipeY - 600;
 
@@ -27,7 +27,7 @@ export function pipeFactory() {
             name={"upperPipe"}
             image={pipe}
             active={true}
-            components={[CollisionComponent, VelocityComponent]}
+            components={[VelocityComponent, DebuggerComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, upperPipeY),
                 rotation: 180,
@@ -41,7 +41,7 @@ export function pipeFactory() {
             name={"lowerPipe"}
             image={pipe}
             active={true}
-            components={[CollisionComponent, VelocityComponent]}
+            components={[VelocityComponent, DebuggerComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, lowerPipeY),
                 width: 100,
@@ -80,7 +80,7 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
-                components={[PlayerController, PhysicsComponent, CollisionComponent]}
+                components={[PlayerController, PhysicsComponent, DebuggerComponent]}
                 transform={{
                     position: new Vector2D(0, 0),
                     width: 80,
