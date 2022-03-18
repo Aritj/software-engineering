@@ -40,12 +40,12 @@ export function pipeFactory() {
 
         <GameObject
             name={"Point"}
-            image={blank}
+            image={""}
             active={true}
             components={[VelocityComponent, DebuggerComponent, CollisionComponent]}
             transform={{
                 position: new Vector2D(startingPositionX, lowerPipeY-200),
-                width: 100,
+                width: 1,
                 height: 200,
                 z: 1
             }}
