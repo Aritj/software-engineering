@@ -37,7 +37,7 @@ export class GameComponent {
     public Render(position: Vector2D) {
         return <img
         src={this.gameObject.image}
-        alt={this.gameObject.name}
+        alt={""}
         style={{
             position: "absolute",
             width: `${this.gameObject.transform.width}px`,

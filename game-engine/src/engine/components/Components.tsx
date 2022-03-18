@@ -1,3 +1,4 @@
+import { PointSystem } from "../Collision/PointSystem";
 import { DebuggerSystem } from "../DebuggerSystem";
 import { GameComponent } from "../superClasses/GameComponent";
 import { Vector2D } from "../Vector2D";
@@ -57,7 +58,58 @@ export class DebuggerComponent extends GameComponent {
 }
 
 export class CollisionComponent extends GameComponent {
+    private _set: boolean = false;
+
+    public trigger() {
+        if (! this._set && this.gameObject.name == "Point") {
+            new PointTrigger().trigger();
+            this._set = true;
+        }
+
+        if (! this._set && (this.gameObject.name == "upperPipe" || this.gameObject.name == "lowerPipe")) {
+            new PipeTrigger().trigger();
+            this._set = true;
+        }
+    }
+
     public Render(position: Vector2D): JSX.Element {
         return <></>;
+    }
+}
+interface Trigger {
+    trigger(): void;
+}
+
+class EmptyTrigger implements Trigger {
+    private _triggered: boolean = false;
+
+    trigger(): void {
+        if (! this._triggered) {
+            console.log("TRIGGER");
+            this._triggered = true;
+        }
+    }
+}
+
+class PointTrigger implements Trigger {
+    private _triggered: boolean = false;
+
+    trigger() {
+        if (! this._triggered) {
+            PointSystem.increasePoint(1);
+            this._triggered = true;        
+        }
+    }
+}
+
+class PipeTrigger implements Trigger {
+    private _triggered: boolean = false;
+
+    trigger() {
+        if (! this._triggered) {
+            // STOP THE GAME
+            this._triggered = true;
+            console.log("PIPE TRIGGER (components.tsx)");
+        }
     }
 }

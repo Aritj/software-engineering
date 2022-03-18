@@ -7,6 +7,7 @@ import {CollisionComponent} from "../components/Components";
 import { DebuggerSystem } from "../DebuggerSystem";
 import {TypeGameObject} from "../types/objects/TypeGameObject";
 import {GameLoopContext} from "./GameLoopContext";
+import { PointSystem } from "../Collision/PointSystem";
 
 let lastCalledTime: number;
 var fps: number;
@@ -14,6 +15,9 @@ var fps: number;
 export function GameLoop(props: PropsWithChildren<{}>) {
     CollisionSystem.initialize(); //initialize static collision system
     TriggerSystem.initialize();
+    PointSystem.initialize();
+    console.log(PointSystem.getPoint());
+     
 
     const [objects, setObject] = useState<TypeGameObject[]>([]);
 
@@ -40,7 +44,7 @@ export function GameLoop(props: PropsWithChildren<{}>) {
         getFPS();
 
         if (DebuggerSystem.getDebugStatus()) {
-            console.log("FPS: " + fps);
+            //console.log("FPS: " + fps);
         }
         
         // Updates
