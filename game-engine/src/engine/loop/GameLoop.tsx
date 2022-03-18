@@ -8,15 +8,25 @@ import { DebuggerSystem } from "../DebuggerSystem";
 import {TypeGameObject} from "../types/objects/TypeGameObject";
 import {GameLoopContext} from "./GameLoopContext";
 
-
+let lastCalledTime: number;
+var fps: number;
 
 export function GameLoop(props: PropsWithChildren<{}>) {
     CollisionSystem.initialize(); //initialize static collision system
     TriggerSystem.initialize();
 
-
     const [objects, setObject] = useState<TypeGameObject[]>([]);
 
+    const getFPS = () => {
+        if(!lastCalledTime) {
+           lastCalledTime = Date.now();
+           fps = 0;
+           return;
+        }
+        let delta = (Date.now() - lastCalledTime)/1000;
+        lastCalledTime = Date.now();
+        fps = Math.round(1/delta);
+    }
 
     const registerObject = (gameObject: TypeGameObject) => {
         setObject((objects) => {
@@ -25,15 +35,18 @@ export function GameLoop(props: PropsWithChildren<{}>) {
         });
     };
 
-
-
     const updateLoop = (now: number) => {
-        // Updates
 
+        getFPS();
+
+        if (DebuggerSystem.getDebugStatus()) {
+            console.log("FPS: " + fps);
+        }
         
+        // Updates
         objects.forEach((obj) => {
             obj.active && obj.components.forEach((comp) => {
-                comp.enabled ? comp.Update(now) : console.log(comp)
+                comp.enabled ? comp.Update(now) : console.log();
             });
         });
 
