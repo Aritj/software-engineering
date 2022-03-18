@@ -49,7 +49,6 @@ export function pipeFactory() {
                 z: 1,
             }}
         />
-
     </Fragment>);
 }
 
@@ -65,11 +64,11 @@ function Game() {
     // Start the game
     useEffect(() => {
         loop.start();
-        test();
-        setInterval(test, 4000)
+        createPipePair();
+        setInterval(createPipePair, 4000)
     }, []);
 
-    const test = () => {
+    const createPipePair = () => {
         pipes.push(React.createElement(pipeFactory, {}));
         setPipes([...pipes])
     }

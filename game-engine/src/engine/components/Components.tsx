@@ -23,22 +23,25 @@ export class VelocityComponent extends GameComponent {
 
 export class DebuggerComponent extends GameComponent {
     private _subscribed = false;
-    public _active = false;
+    public active = false;
 
     public Update(dt: number): void {
         if (! this._subscribed) {
             DebuggerSystem.add(this);
             this._subscribed = true;
-            this._active = DebuggerSystem.getDebugStatus();
+            this.active = DebuggerSystem.getDebugStatus();
         }
 
-        super.Update(dt);
+        if (this.active) {
+            //console.log(dt);
+        }
     }
     
     public Render(position: Vector2D): JSX.Element {
-        if (! this._active) {
+        if (! this.active) {
             return <></>;
         }
+        
         return <div
             style={{
                 position: "absolute",
