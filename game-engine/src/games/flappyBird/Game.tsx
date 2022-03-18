@@ -13,6 +13,7 @@ import { InputSystem } from "../../engine/input/InputSystem";
 import inputs from "../flappyBird/user_input.json"
 import { GameComponent } from "../../engine/superClasses/GameComponent";
 import React from "react";
+import {PointSystem} from "../../engine/Collision/PointSystem";
 
 
 export function pipeFactory(this: any) {
@@ -93,19 +94,10 @@ function Game() {
                 name={"Bird"}
                 image={bird}
                 active={true}
-
-
-                
-                
                 //components={[PlayerController, PhysicsComponent, CollisionComponent]}
-
-
-
-
                 components={[PlayerController, PhysicsComponent, DebuggerComponent, CollisionComponent]}
-
                 transform={{
-                    position: new Vector2D(0, 0),
+                    position: new Vector2D(150, 0),
                     width: 80,
                     height: 60,
                     z: 3,
@@ -128,8 +120,42 @@ function Game() {
                     z: -1,
                 }}
             />
+
+            <GameObject
+                name={"Score"}
+                image={""}
+                active={true}
+                components={[ScoreBoard]}
+                transform={{
+                    position: new Vector2D(500, 10),
+                    width: 200,
+                    height: 100,
+                    z: 10,
+                }}
+            />
         </Fragment>
     );
+}
+
+export class ScoreBoard extends GameComponent {
+
+    public Render(position: Vector2D): JSX.Element {
+        return <div
+            style={{
+                position: "absolute",
+                fontFamily: "Comic Sans MS, Sans-Serif",
+                width: `${this.gameObject.transform.width}px`,
+                height: `${this.gameObject.transform.height}px`,
+                left: `${this.gameObject.transform.position.x}px`,
+                top: `${this.gameObject.transform.position.y}px`,
+                color: "white",
+                fontSize: "50px",
+                fontWeight: "bold",
+                zIndex: `${this.gameObject.transform.z}`,
+            }} >
+            {this.gameObject.name + " " + PointSystem.getPoint()}
+        </div>
+    }
 }
 
 export default Game;
