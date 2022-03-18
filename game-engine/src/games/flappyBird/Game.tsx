@@ -68,6 +68,9 @@ export function pipeFactory(this: any) {
 }
 
 
+let audioSwapNeeded: boolean = false;
+let audio: HTMLAudioElement;
+let prevPoint: number = -1;
 
 function Game() {
     const loop = useGameLoop();
@@ -87,6 +90,45 @@ function Game() {
         pipes.push(React.createElement(pipeFactory, {}));
         setPipes([...pipes])
     }
+
+    if (PointSystem.getPoint() != prevPoint) {
+        swapAudio(PointSystem.getPoint());
+        prevPoint = PointSystem.getPoint();
+    }
+
+    function swapAudio(current: number) {
+        let level0: number = 0;
+        let level1: number = 3;
+        let level2: number = 6;
+
+        if (current == level0 || current == level1 || current == level2) {
+            audioSwapNeeded = true;
+        }
+        
+
+        if (audioSwapNeeded && level0 <= current && current < level1) {
+            audio = new Audio("/audio/level1.mp3");
+            audio.play();
+        } 
+
+        if (audioSwapNeeded && level1 <= current && current < level2) {
+            audio.pause();
+            audio = new Audio("/audio/level2.mp3");
+            audio.play();
+        }
+
+        if (audioSwapNeeded && level2 <= current) {
+            audio.pause();
+            audio = new Audio("/audio/level3.mp3");
+            audio.play();
+        }
+        audioSwapNeeded = false;
+    }
+
+
+
+
+
 
     return (
         <Fragment>
