@@ -3,6 +3,7 @@ import { GameObject } from "../../engine/functionalComponents/GameObject";
 import { Vector2D } from "../../engine/Vector2D";
 import { Fragment, useEffect, useState } from "react";
 import { useGameLoop } from "../../engine/loop";
+import blank from "../flappyBird/images/blank.png";
 import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
 import background from "../flappyBird/images/background.png";
@@ -34,6 +35,19 @@ export function pipeFactory() {
                 width: 100,
                 height: 400,
                 z: 1,
+            }}
+        />
+
+        <GameObject
+            name={"Point"}
+            image={blank}
+            active={true}
+            components={[VelocityComponent, DebuggerComponent, CollisionComponent]}
+            transform={{
+                position: new Vector2D(startingPositionX, lowerPipeY-200),
+                width: 100,
+                height: 200,
+                z: 1
             }}
         />
 
