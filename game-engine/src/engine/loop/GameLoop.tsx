@@ -16,6 +16,8 @@ export function GameLoop(props: PropsWithChildren<{}>) {
     CollisionSystem.initialize(); //initialize static collision system
     TriggerSystem.initialize();
     PointSystem.initialize();
+    console.log(PointSystem.getPoint());
+     
 
     const [objects, setObject] = useState<TypeGameObject[]>([]);
 
@@ -42,7 +44,7 @@ export function GameLoop(props: PropsWithChildren<{}>) {
         getFPS();
 
         if (DebuggerSystem.getDebugStatus()) {
-            console.log("FPS: " + fps);
+            //console.log("FPS: " + fps);
         }
         
         // Updates

@@ -8,7 +8,6 @@ interface IMyGameObjType {
     key: string,
     _bool: boolean
 }
-
 export class CollisionSystem {
     private static _instance: CollisionSystem;
     private constructor() { }
@@ -25,12 +24,8 @@ export class CollisionSystem {
      * @param gameObject
      */
     public static registerCollisionObjects(gameObject: TypeGameObject) {
-
         if (gameObject.getComponent(CollisionComponent) !== null) {
-            
             this._instance.collisionObject.push({obj:gameObject, key:uuidv4(), _bool:false})
-            console.log(this._instance.collisionObject[0].key);
-            console.log(this._instance.collisionObject.length);
         }
     };
 
@@ -44,19 +39,20 @@ export class CollisionSystem {
         }
 
         for (let i: number = 0; i < this._instance.collisionObject.length; i++) {
-            let current: IMyGameObjType = this._instance.collisionObject[i]
+            let current: IMyGameObjType = this._instance.collisionObject[i];
+
             for (let j: number = i + 1; j < this._instance.collisionObject.length; j++) {
                 if (current === this._instance.collisionObject[j]) {
                     continue;
                 }
 
                 if (collision(current, this._instance.collisionObject[j])) {
-                    //current.obj.onTriggered(current.obj, this._instance.collisionObject[j].obj)
-                    
-                    TriggerSystem.onTriggered(current.obj, this._instance.collisionObject[j].obj);
-                    console.log("Collision");
-                    
-
+                    this._instance.collisionObject[j].obj.components.forEach(comp => {
+                        if (comp instanceof CollisionComponent) {
+                            comp.trigger();
+                        }
+                    })
+                    //TriggerSystem.onTriggered(current.obj, this._instance.collisionObject[j].obj); // LEGACY (OLD)
                 }
             }
         }

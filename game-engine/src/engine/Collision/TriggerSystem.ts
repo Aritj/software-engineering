@@ -1,5 +1,6 @@
-import { PhysicsComponent } from "../components/Components";
+import { CollisionComponent, PhysicsComponent } from "../components/Components";
 import { TypeGameObject } from "../types/objects/TypeGameObject";
+import { PointSystem } from "./PointSystem";
 
 export class TriggerSystem  {
     private static _instance: TriggerSystem;
@@ -19,6 +20,11 @@ export class TriggerSystem  {
                 physics?.setEnabled(false);
                 
             }
+            
+            if (gameObj2.name == "Point") {
+                PointSystem.increasePoint(1);
+            }
+
         }
     }
 

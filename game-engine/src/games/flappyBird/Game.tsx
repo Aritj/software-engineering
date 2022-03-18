@@ -15,7 +15,7 @@ import { GameComponent } from "../../engine/superClasses/GameComponent";
 import React from "react";
 
 
-export function pipeFactory() {
+export function pipeFactory(this: any) {
     const variable: number = Math.floor(Math.random() * (200 - (-200) + 1)) - 200;
     const startingPositionX: number = 1200;
     const lowerPipeY = 400 - variable;
@@ -44,7 +44,7 @@ export function pipeFactory() {
             active={true}
             components={[VelocityComponent, DebuggerComponent, CollisionComponent]}
             transform={{
-                position: new Vector2D(startingPositionX, lowerPipeY-200),
+                position: new Vector2D(startingPositionX+199, lowerPipeY-200),
                 width: 1,
                 height: 200,
                 z: 1
