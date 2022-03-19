@@ -107,9 +107,7 @@ class PipeTrigger implements Trigger {
 
     trigger() {
         if (! this._triggered) {
-            // STOP THE GAME
-            this._triggered = true;
-            console.log("PIPE TRIGGER (components.tsx)");
+            throw new Error("PIPE HIT");
         }
     }
 }

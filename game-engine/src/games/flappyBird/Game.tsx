@@ -6,7 +6,9 @@ import { useGameLoop } from "../../engine/loop";
 import blank from "../flappyBird/images/blank.png";
 import bird from "../flappyBird/images/bird.png";
 import pipe from "../flappyBird/images/pipe.png";
-import background from "../flappyBird/images/background.png";
+import level0 from "../flappyBird/images/level0.png";
+import level1 from "../flappyBird/images/level1.png";
+import level2 from "../flappyBird/images/level2.png";
 import { PlayerController } from "./PlayerController";
 import { PhysicsComponent, VelocityComponent, DebuggerComponent, CollisionComponent } from "../../engine/components/Components";
 import { InputSystem } from "../../engine/input/InputSystem";
@@ -67,14 +69,13 @@ export function pipeFactory(this: any) {
     </Fragment>);
 }
 
-
 let audioSwapNeeded: boolean = false;
 let audio: HTMLAudioElement;
 let prevPoint: number = -1;
 
 function Game() {
     const loop = useGameLoop();
-
+    const [background, setBackground] = useState(level0);
     const [pipes, setPipes] = useState<React.FunctionComponentElement<{}>[]>([]);
 
     InputSystem.initialize(inputs);
@@ -97,38 +98,35 @@ function Game() {
     }
 
     function swapAudio(current: number) {
-        let level0: number = 0;
-        let level1: number = 3;
-        let level2: number = 6;
+        let level0_pipes: number = 0;
+        let level1_pipes: number = 1;
+        let level2_pipes: number = 2;
 
-        if (current == level0 || current == level1 || current == level2) {
+        if (current == level0_pipes || current == level1_pipes || current == level2_pipes) {
             audioSwapNeeded = true;
         }
         
 
-        if (audioSwapNeeded && level0 <= current && current < level1) {
+        if (audioSwapNeeded && level0_pipes <= current && current < level1_pipes) {
             audio = new Audio("/audio/level1.mp3");
             audio.play();
         } 
 
-        if (audioSwapNeeded && level1 <= current && current < level2) {
+        if (audioSwapNeeded && level1_pipes <= current && current < level2_pipes) {
+            setBackground(level1)
             audio.pause();
             audio = new Audio("/audio/level2.mp3");
             audio.play();
         }
 
-        if (audioSwapNeeded && level2 <= current) {
+        if (audioSwapNeeded && level2_pipes <= current) {
+            setBackground(level2)
             audio.pause();
             audio = new Audio("/audio/level3.mp3");
             audio.play();
         }
         audioSwapNeeded = false;
     }
-
-
-
-
-
 
     return (
         <Fragment>
